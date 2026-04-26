@@ -13,16 +13,49 @@ graph TD
 
     Usuario[Usuário autenticado]
 
-    Usuario --> Receitas[Gerenciar receitas]
-    Usuario --> Despesas[Gerenciar despesas]
-    Usuario --> Lancamentos[Editar/excluir lançamentos]
-    Usuario --> Categorias[Gerenciar categorias]
-    Usuario --> Relatorios[Visualizar relatórios]
-    Usuario --> Graficos[Visualizar gráficos]
-    Usuario --> Comparativo[Comparar meses]
-    Usuario --> Metas[Gerenciar metas financeiras]
-    Usuario --> Orçamento[Controle de orçamento]
-    Usuario --> Dashboard[Visualizar dashboard]
-    Usuario --> Filtros[Filtrar transações]
-    Usuario --> Personalizacao[Personalizar interface]
-    Usuario --> Dados[Persistência de dados]
+    %% Grupo financeiro
+    subgraph Financeiro
+        Receitas[Gerenciar receitas]
+        Despesas[Gerenciar despesas]
+        Lancamentos[Editar/excluir lançamentos]
+        Categorias[Gerenciar categorias]
+    end
+
+    %% Grupo análise
+    subgraph Análise
+        Relatorios[Visualizar relatórios]
+        Graficos[Visualizar gráficos]
+        Comparativo[Comparar meses]
+        Dashboard[Visualizar dashboard]
+    end
+
+    %% Grupo controle
+    subgraph Controle
+        Metas[Gerenciar metas financeiras]
+        Orcamento[Controle de orçamento]
+        Filtros[Filtrar transações]
+    end
+
+    %% Grupo sistema
+    subgraph Sistema
+        Personalizacao[Personalizar interface]
+        Dados[Persistência de dados]
+    end
+
+    %% Ligações
+    Usuario --> Receitas
+    Usuario --> Despesas
+    Usuario --> Lancamentos
+    Usuario --> Categorias
+
+    Usuario --> Relatorios
+    Usuario --> Graficos
+    Usuario --> Comparativo
+    Usuario --> Dashboard
+
+    Usuario --> Metas
+    Usuario --> Orcamento
+    Usuario --> Filtros
+
+    Usuario --> Personalizacao
+    Usuario --> Dados
