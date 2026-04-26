@@ -13,49 +13,29 @@ graph TD
 
     Usuario[Usuário autenticado]
 
-    %% Grupo financeiro
-    subgraph Financeiro
-        Receitas[Gerenciar receitas]
-        Despesas[Gerenciar despesas]
-        Lancamentos[Editar/excluir lançamentos]
-        Categorias[Gerenciar categorias]
-    end
+    %% Nível 1
+    Usuario --> Financeiro
+    Usuario --> Analise
+    Usuario --> Controle
+    Usuario --> Sistema
 
-    %% Grupo análise
-    subgraph Análise
-        Relatorios[Visualizar relatórios]
-        Graficos[Visualizar gráficos]
-        Comparativo[Comparar meses]
-        Dashboard[Visualizar dashboard]
-    end
+    %% Nível 2 - Financeiro
+    Financeiro --> Receitas[Receitas]
+    Financeiro --> Despesas[Despesas]
+    Financeiro --> Lancamentos[Lançamentos]
+    Financeiro --> Categorias[Categorias]
 
-    %% Grupo controle
-    subgraph Controle
-        Metas[Gerenciar metas financeiras]
-        Orcamento[Controle de orçamento]
-        Filtros[Filtrar transações]
-    end
+    %% Nível 2 - Análise
+    Analise --> Relatorios[Relatórios]
+    Analise --> Graficos[Gráficos]
+    Analise --> Comparativo[Comparativo]
+    Analise --> Dashboard[Dashboard]
 
-    %% Grupo sistema
-    subgraph Sistema
-        Personalizacao[Personalizar interface]
-        Dados[Persistência de dados]
-    end
+    %% Nível 2 - Controle
+    Controle --> Metas[Metas]
+    Controle --> Orcamento[Orçamento]
+    Controle --> Filtros[Filtros]
 
-    %% Ligações
-    Usuario --> Receitas
-    Usuario --> Despesas
-    Usuario --> Lancamentos
-    Usuario --> Categorias
-
-    Usuario --> Relatorios
-    Usuario --> Graficos
-    Usuario --> Comparativo
-    Usuario --> Dashboard
-
-    Usuario --> Metas
-    Usuario --> Orcamento
-    Usuario --> Filtros
-
-    Usuario --> Personalizacao
-    Usuario --> Dados
+    %% Nível 2 - Sistema
+    Sistema --> Personalizacao[Personalização]
+    Sistema --> Dados[Persistência de dados]
