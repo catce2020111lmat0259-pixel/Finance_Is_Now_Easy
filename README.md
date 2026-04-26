@@ -178,16 +178,20 @@ Status: Em desenvolvimento
 
 ## Sprints
 
-| Sprint   | Entregas                             |
-| -------- | ------------------------------------ |
-| Sprint 1 | Requisitos e documentação            |
-| Sprint 2 | Modelagem e funcionalidades iniciais |
-| Sprint 3 | Implementação e testes               |
+| Sprint   | Descrição                                                                                                                                         |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sprint 1 | Inception do projeto, definição da ideia, levantamento inicial de requisitos e visão do sistema                                                   |
+| Sprint 2 | Construção e refinamento do Product Backlog (histórias de usuário, critérios de aceitação)                                                        |
+| Sprint 3 | Prototipação simples das funcionalidades (HU01, HU02, HU04, HU09) e ajustes após orientação do professor                                          |
+| Sprint 4 | Estruturação do backend com Flask (MVC), organização do repositório, documentação (README, modelagem) e desenvolvimento das HUs HU04, HU09 e HU16 |
+| Sprint 5 | Continuação da implementação, integração das funcionalidades principais e estabilização do sistema                                                       |
+
 
 ## Histórico de Entregas
 
-* Entrega 1: levantamento e documentação
-* Entrega 2: modelagem parcial
+- Entrega 1 (Sprint 1 e 2): definição do projeto, levantamento de requisitos e construção do backlog  
+- Entrega 2 (Sprint 3): prototipação inicial das funcionalidades (HU01, HU02, HU04, HU09)  
+- Entrega 3 (Sprint 4 - atual): estruturação do backend com Flask (MVC), organização do repositório e documentação do projeto  
 
 ---
 
