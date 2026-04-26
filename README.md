@@ -13,6 +13,7 @@
 * Daniel Bacelar
 * Diego Bacelar
 * Gabriel Lopes
+* Manuel 
 * Wesley Romão
 
 ## Disciplina
@@ -149,14 +150,14 @@ Ainda não finalizado.
 Será baseado nas entidades: usuário, receitas, despesas, metas e categorias.
 
 Responsável: Equipe
-Previsão: Sprint 2
+Previsão: Sprint 4
 
 ## Diagrama de Classes
 
 Ainda não elaborado.
 
 Responsável: Equipe
-Previsão: Sprint 2
+Previsão: Sprint 4
 
 ---
 
@@ -185,13 +186,13 @@ Status: Em desenvolvimento
 
 ## Sprints
 
-| Sprint   | Descrição                                                                                                                                         |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sprint 1 | Inception do projeto, definição da ideia, levantamento inicial de requisitos e visão do sistema                                                   |
-| Sprint 2 | Construção e refinamento do Product Backlog (histórias de usuário, critérios de aceitação)                                                        |
-| Sprint 3 | Prototipação simples das funcionalidades (HU01, HU02, HU04, HU09) e ajustes após orientação do professor                                          |
-| Sprint 4 | Estruturação do backend com Flask (MVC), organização do repositório, documentação (README, modelagem) e desenvolvimento das HUs HU04, HU09 e HU16 |
-| Sprint 5 | Continuação da implementação, integração das funcionalidades principais e estabilização do sistema                                                |
+| Sprint     | Descrição                                                                                                                                         |
+| --------   | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sprint 1   | Inception do projeto, definição da ideia, levantamento inicial de requisitos e visão do sistema                                                   |
+| Sprint 2   | Construção e refinamento do Product Backlog (histórias de usuário, critérios de aceitação)                                                        |
+| Sprint 3   | Prototipação simples das funcionalidades (HU01, HU02, HU04, HU09) e ajustes após orientação do professor                                          |
+| Sprint 4   | Estruturação do backend com Flask (MVC), organização do repositório, documentação (README, modelagem) e desenvolvimento das HUs HU04, HU09 e HU16 |
+| Sprint 5   | Continuação da implementação, integração das funcionalidades principais e estabilização do sistema                                                |
 
 ## Histórico de Entregas
 
