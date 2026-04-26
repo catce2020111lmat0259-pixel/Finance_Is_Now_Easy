@@ -46,7 +46,7 @@ flowchart LR
     C2[Controller salvar_meta]
 
     %% Model e DB
-    M[Model Meta (clean + validate)]
+    M["Model Meta (clean + validate)"]
     D[(Database - SQLite / SQLAlchemy)]
 
     %% Listagem
