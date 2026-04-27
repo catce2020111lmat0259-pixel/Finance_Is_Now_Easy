@@ -110,19 +110,34 @@ O sistema permite ao usuário:
 
 ---
 
+# 7. Modelagem do Sistema
+
 ## Diagrama de Casos de Uso
 
 ![Casos de Uso](docs/modelagem/geral/casos-de-uso.png)
 
+> Versão em Mermaid:
+> `docs/modelagem/geral/casos-de-uso.md`
+
+---
+
 ## Fluxo de Telas
 
-![Fluxo de Telas](docs/modelagem/fluxos/fluxo-hu09-metas.png)
+![Fluxo de Telas - HU09 Metas](docs/modelagem/fluxos/fluxo-hu09-metas.png)
+
+> Exemplo de fluxo referente à HU09 – Metas financeiras.
+> Versão completa dos fluxos disponível em:
+> `docs/modelagem/fluxos/`
+
+---
 
 ## Arquitetura
 
 ![Arquitetura](docs/modelagem/geral/arquitetura.png)
 
 Status: Em desenvolvimento
+
+---
 
 ## Modelo Entidade-Relacionamento
 
@@ -132,13 +147,15 @@ Motivo: Modelagem de dados ainda em definição conforme evolução das funciona
 Previsão: Sprint 5  
 Responsável: Equipe  
 
+---
+
 ## Diagrama de Classes
 
 Ainda não elaborado.
 
 Motivo: Dependente da finalização da modelagem e estrutura completa do sistema.  
 Previsão: Sprint 5  
-Responsável: Equipe  
+Responsável: Equipe    
 
 ---
 
