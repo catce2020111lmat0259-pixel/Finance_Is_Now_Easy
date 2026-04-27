@@ -9,23 +9,24 @@ Este diagrama representa as principais funcionalidades do sistema Finance Is Now
 ## Diagrama
 
 ```mermaid
-graph LR
+## Diagrama
 
-    Usuario[Usuário autenticado]
+```mermaid
+flowchart LR
 
-    %% Lado esquerdo
-    Usuario --> Receitas[Gerenciar receitas]
-    Usuario --> Despesas[Gerenciar despesas]
-    Usuario --> Lancamentos[Editar/excluir lançamentos]
-    Usuario --> Categorias[Gerenciar categorias]
-    Usuario --> Relatorios[Visualizar relatórios]
-    Usuario --> Graficos[Visualizar gráficos]
+    Usuario["Usuário autenticado"]
 
-    %% Lado direito
-    Usuario --> Comparativo[Comparar meses]
-    Usuario --> Metas[Gerenciar metas financeiras]
-    Usuario --> Orcamento[Controle de orçamento]
-    Usuario --> Dashboard[Visualizar dashboard]
-    Usuario --> Filtros[Filtrar transações]
-    Usuario --> Personalizacao[Personalizar interface]
-    Usuario --> Dados[Persistência de dados]
+    Usuario --> Receitas["Gerenciar receitas"]
+    Usuario --> Despesas["Gerenciar despesas"]
+    Usuario --> Lancamentos["Editar/excluir lançamentos"]
+    Usuario --> Categorias["Gerenciar categorias"]
+    Usuario --> Relatorios["Visualizar relatórios"]
+    Usuario --> Graficos["Visualizar gráficos"]
+
+    Usuario --> Comparativo["Comparar meses"]
+    Usuario --> Metas["Gerenciar metas financeiras"]
+    Usuario --> Orcamento["Controle de orçamento"]
+    Usuario --> Dashboard["Visualizar dashboard"]
+    Usuario --> Filtros["Filtrar transações"]
+    Usuario --> Personalizacao["Personalizar interface"]
+    Usuario --> Dados["Persistência de dados"]
