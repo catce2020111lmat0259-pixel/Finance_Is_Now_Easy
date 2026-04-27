@@ -9,9 +9,6 @@ Este diagrama representa as principais funcionalidades do sistema Finance Is Now
 ## Diagrama
 
 ```mermaid
-## Diagrama
-
-```mermaid
 flowchart LR
 
     Usuario["Usuário autenticado"]
