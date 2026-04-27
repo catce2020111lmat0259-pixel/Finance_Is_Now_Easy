@@ -1,4 +1,4 @@
-# Fluxo da Funcionalidade - HU00 (Login e Validação)
+# Fluxo da Funcionalidade - HU16 (Login e Validação)
 
 ## Descrição
 Este documento apresenta o fluxo da funcionalidade de cadastro, autenticação e encerramento de sessão de usuários, conforme definido na HU16 do Product Backlog.
