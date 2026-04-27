@@ -110,64 +110,55 @@ O sistema permite ao usuário:
 
 ---
 
-# 7. Modelagem do Sistema
-
 ## Diagrama de Casos de Uso
 
-Disponível em:
-`docs/modelagem/geral/casos-de-uso.md`
+![Casos de Uso](docs/modelagem/geral/casos-de-uso.png)
 
 ## Fluxo de Telas
 
-Os fluxos estão sendo documentados por funcionalidade (Histórias de Usuário).
-
-Exemplos:
-
-* HU04 – Categorias:
-  `docs/modelagem/fluxos/fluxo-hu04-categorias.md`
-
-* HU09 – Metas financeiras:
-  `docs/modelagem/fluxos/fluxo-hu09-metas.md`
-
-* HU16 – Login:
-  `docs/modelagem/fluxos/fluxo-hu16-login.md`
-
-Os demais fluxos serão adicionados conforme evolução das funcionalidades.
-
-Responsável: Equipe
-Status: Em desenvolvimento
+![Fluxo de Telas](docs/modelagem/fluxos/fluxo-hu09-metas.png)
 
 ## Arquitetura
 
-Disponível em:
-`docs/modelagem/geral/arquitetura.md`
+![Arquitetura](docs/modelagem/geral/arquitetura.png)
 
 Status: Em desenvolvimento
 
 ## Modelo Entidade-Relacionamento
 
 Ainda não finalizado.
-Será baseado nas entidades: usuário, receitas, despesas, metas e categorias.
 
-Responsável: Equipe
-Previsão: Sprint 4
+Motivo: Modelagem de dados ainda em definição conforme evolução das funcionalidades.  
+Previsão: Sprint 5  
+Responsável: Equipe  
 
 ## Diagrama de Classes
 
 Ainda não elaborado.
 
-Responsável: Equipe
-Previsão: Sprint 4
+Motivo: Dependente da finalização da modelagem e estrutura completa do sistema.  
+Previsão: Sprint 5  
+Responsável: Equipe  
 
 ---
 
 # 8. Protótipos
 
-A prototipação do sistema está sendo realizada diretamente no desenvolvimento das interfaces utilizando templates HTML no Flask.
+## Tela de Login
 
-Os fluxos das funcionalidades (baseados nas histórias de usuário) também servem como apoio à prototipação.
+![Tela de Login](docs/prototipos/login.png)
 
-Protótipos mais visuais (ex: Figma) poderão ser adicionados futuramente.
+---
+
+## Tela de Categorias
+
+![Tela de Categorias](docs/prototipos/categorias.png)
+
+---
+
+## Tela de Metas Financeiras
+
+![Tela de Metas](docs/prototipos/metas.png)
 
 Responsável: Equipe
 Status: Em desenvolvimento
@@ -200,6 +191,10 @@ Status: Em desenvolvimento
 * Entrega 2 (Sprint 3): prototipação inicial das funcionalidades (HU01, HU02, HU04, HU09)
 * Entrega 3 (Sprint 4 - atual): estruturação do backend com Flask (MVC), organização do repositório e documentação do projeto
 
+## Gestão das Tarefas
+
+![Jira](docs/planejamento/Jira.png)
+
 ---
 
 # 10. Banco de Dados
@@ -212,6 +207,14 @@ Os scripts e definições do banco estarão disponíveis na pasta `/database`.
 
 * SQLite (uso atual para desenvolvimento local)
 * PostgreSQL (planejado via Render para ambiente em rede)
+
+## Modelo Visual
+
+Ainda não disponível.
+
+Motivo: Modelo ER em desenvolvimento.  
+Previsão: Sprint 5  
+Responsável: Equipe  
 
 ## Observações
 
@@ -244,7 +247,10 @@ O desenvolvimento está sendo guiado pelas histórias de usuário definidas no b
 # 12. Evidências do Projeto
 
 Ainda não disponíveis.
-Serão adicionadas conforme evolução do sistema.
+
+Motivo: Em atualização.  
+Previsão: Sprint 5  
+Responsável: Equipe  
 
 ---
 
