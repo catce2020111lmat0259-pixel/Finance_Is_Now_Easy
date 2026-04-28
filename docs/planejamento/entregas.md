@@ -67,11 +67,17 @@ Estruturação do backend e organização do projeto.
 * Backend estruturado com Flask (MVC)
 * Implementação das funcionalidades:
 
-  * Metas (HU09)
-  * Categorias (HU04)
-  * Login (HU16)
+  * Categorias (HU04) - Manuel
+  * Metas (HU09) - Gabriel
+  * Login (HU16) - Manuel
 * Organização do repositório conforme padrão do professor
 * Documentação do projeto (README, modelagem, planejamento)
+
+### Observações
+* Implementação das funcionalidades não conclúidas:
+
+  * Receitas (HU01) - Daniel
+  * Despesas (HU02) - Diego
 
 ---
 
