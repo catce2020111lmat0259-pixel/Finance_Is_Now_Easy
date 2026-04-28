@@ -199,7 +199,7 @@ Status: Em desenvolvimento
 | Sprint 1   | Inception do projeto, definição da ideia, levantamento inicial de requisitos e visão do sistema                                                   |
 | Sprint 2   | Construção e refinamento do Product Backlog (histórias de usuário, critérios de aceitação)                                                        |
 | Sprint 3   | Prototipação simples das funcionalidades (HU01, HU02, HU04, HU09) e ajustes após orientação do professor                                          |
-| Sprint 4   | Estruturação do backend com Flask (MVC), organização do repositório, documentação (README, modelagem) e desenvolvimento das HUs HU04, HU09 e HU16 |
+| Sprint 4   | Estruturação do backend com Flask (MVC), organização do repositório, documentação (README, modelagem) e desenvolvimento das HUs HU01, HU02, HU04, HU09 e HU16 |
 | Sprint 5   | Continuação da implementação, integração das funcionalidades principais e estabilização do sistema                                                |
 
 ## Histórico de Entregas
