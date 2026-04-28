@@ -90,6 +90,8 @@ Estruturação do sistema e implementação organizada com backend.
 * Estruturação do backend com Flask (MVC)
 * Implementação das funcionalidades:
 
+  * HU01 – Receitas
+  * HU02 – Despesas
   * HU04 – Categorias
   * HU09 – Metas
   * HU16 – Login
