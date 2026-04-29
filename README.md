@@ -163,7 +163,7 @@ Responsável: Equipe
 
 ## Tela de Login
 
-![Tela de Login](docs/prototipos/login.png)
+![Tela de Login](docs/prototipos/login-normal.png)
 
 ---
 
