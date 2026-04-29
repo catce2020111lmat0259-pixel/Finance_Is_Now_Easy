@@ -169,7 +169,7 @@ Responsável: Equipe
 
 ## Tela de Categorias
 
-![Tela de Categorias](docs/prototipos/categorias.png)
+![Tela de Categorias](docs/prototipos/inicial-categorias.png)
 
 ---
 
