@@ -89,9 +89,9 @@ A comunicação com o banco é feita através do **SQLAlchemy**.
 
 ## Diagrama de Arquitetura
 
-O diagrama abaixo representa a arquitetura do sistema FINE, destacando a separação em camadas (Frontend, Backend e Banco de Dados) e a organização interna do backend no padrão MVC.
+O diagrama abaixo representa a arquitetura do sistema FINE, destacando a separação em camadas (Frontend, Backend e Banco de Dados) e a organização interna do backend no padrão MVC:
 
-![Arquitetura do Sistema](docs/modelagem/geral/arquitetura.png)
+`docs/modelagem/geral/arquitetura.png`
 
 Responsável: Equipe  
 Status: Concluído  
