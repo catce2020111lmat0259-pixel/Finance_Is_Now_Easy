@@ -33,7 +33,7 @@ Uma categoria representa a natureza financeira de um registro e possui as seguin
 
 ---
 
-## Categorias Fixas (Seed automático)
+## Categorias Fixas ou Nativas (Seed automático)
 
 ### Tipo: Despesa
 - Aluguel  
