@@ -116,6 +116,8 @@ O sistema permite ao usuário:
 
 ![Casos de Uso](docs/modelagem/geral/casos-de-uso.png)
 
+`docs/modelagem/geral/casos-de-uso.png`
+
 > Versão em Mermaid:
 > `docs/modelagem/geral/casos-de-uso.md`
 
@@ -135,7 +137,7 @@ O sistema permite ao usuário:
 
 ![Arquitetura](docs/modelagem/geral/arquitetura.png)
 
-Status: Em desenvolvimento
+`docs/modelagem/geral/arquitetura.png`
 
 ---
 
