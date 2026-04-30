@@ -90,7 +90,7 @@ A autenticação permite validar a identidade do usuário por meio de credenciai
 
 ### Bloqueio da tela de login
 11. Usuário autenticado tenta acessar `/login`  
-12. Sistema redireciona para `/dashboard`  
+12. Sistema **redireciona** para `/categorias`  
 
 ---
 
@@ -141,12 +141,12 @@ Então deve redirecionar para login
 **CA07 — Bloqueio da tela de login**  
 Dado que o usuário já está autenticado  
 Quando acessar `/login`  
-Então deve ser redirecionado para área principal  
+Então deve ser redirecionado para área principal ( nesse caso /categorias )  
 
 **CA08 — Logout**  
 Dado que o usuário está autenticado  
 Quando realizar logout  
-Então o sistema deve encerrar sessão e redirecionar  
+Então o sistema deve encerrar sessão e redirecionar 
 
 ---
 
