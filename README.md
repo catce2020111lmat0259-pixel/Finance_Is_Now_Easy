@@ -210,9 +210,9 @@ Status: Em desenvolvimento
 * Entrega 2 (Sprint 3): prototipação inicial das funcionalidades (HU01, HU02, HU04, HU09)
 * Entrega 3 (Sprint 4 - atual): estruturação do backend com Flask (MVC), organização do repositório e documentação do projeto
 
-## Gestão das Tarefas
+## Gestão das Tarefas (atual)
 
-![Jira](docs/planejamento/Jira.png)
+![Jira](docs/planejamento/Jira(1).png)
 
 ---
 
