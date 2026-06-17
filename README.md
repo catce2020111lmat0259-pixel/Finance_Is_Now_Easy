@@ -206,21 +206,30 @@ Status: Em desenvolvimento
 | Modelagem                  | Em andamento |
 | Implementação              | Pendente     |
 
+
 ## Sprints
 
-| Sprint     | Descrição                                                                                                                                         |
-| --------   | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sprint 1   | Inception do projeto, definição da ideia, levantamento inicial de requisitos e visão do sistema                                                   |
-| Sprint 2   | Construção e refinamento do Product Backlog (histórias de usuário, critérios de aceitação)                                                        |
-| Sprint 3   | Prototipação simples das funcionalidades (HU01, HU02, HU04, HU09) e ajustes após orientação do professor                                          |
-| Sprint 4   | Estruturação do backend com Flask (MVC), organização do repositório, documentação (README, modelagem) e desenvolvimento das HUs HU01, HU02, HU04, HU09 e HU16 |
-| Sprint 5   | Continuação da implementação, integração das funcionalidades principais e estabilização do sistema                                                |
+| Sprint   | Descrição |
+|-----------|-----------|
+| Sprint 1 | Inception do projeto, definição da ideia, levantamento inicial de requisitos e visão do sistema |
+| Sprint 2 | Construção e refinamento do Product Backlog (histórias de usuário, critérios de aceitação e regras de negócio) |
+| Sprint 3 | Prototipação inicial das funcionalidades (HU01, HU02, HU04 e HU09) e refinamento das interfaces |
+| Sprint 4 | Estruturação do backend com Flask MVC, organização do repositório, documentação (README, modelagem e planejamento) |
+| Sprint 5 | Implementação das funcionalidades principais do sistema: Login (HU16), Categorias (HU04), Metas (HU09), Receitas (HU01), Despesas (HU02), Persistência de Dados (HU15) e operações de edição/exclusão (HU03) |
+| Sprint 6 | Implementação de filtros e pesquisas (HU13), relatórios (HU06), gráficos (HU07), integração das funcionalidades e melhorias gerais da interface |
+| Sprint 7 | Finalização do sistema, testes integrados, correções de bugs, dashboard (HU11), validações finais e preparação para apresentação |
 
 ## Histórico de Entregas
 
-* Entrega 1 (Sprint 1 e 2): definição do projeto, levantamento de requisitos e construção do backlog
-* Entrega 2 (Sprint 3): prototipação inicial das funcionalidades (HU01, HU02, HU04, HU09)
-* Entrega 3 (Sprint 4 - atual): estruturação do backend com Flask (MVC), organização do repositório e documentação do projeto
+* Entrega 1 (Sprint 1 e 2): definição do projeto, levantamento de requisitos, regras de negócio e construção do backlog.
+
+* Entrega 2 (Sprint 3): prototipação inicial das funcionalidades (HU01, HU02, HU04 e HU09).
+
+* Entrega 3 (Sprint 4): estruturação da arquitetura Flask MVC, reorganização do repositório, modelagem inicial e documentação do projeto.
+
+* Entrega 4 (Sprint 5): implementação das funcionalidades principais do sistema, incluindo login e autenticação, gerenciamento de categorias, metas financeiras, receitas, despesas, persistência de dados e operações de edição e exclusão.
+
+* Entrega 5 (Sprint 6 - atual): implementação de filtros de pesquisa, relatórios financeiros, gráficos, melhorias de integração entre funcionalidades e refinamento da interface.
 
 ## Gestão das Tarefas (atual)
 
@@ -263,11 +272,23 @@ Desenvolvido com Flask seguindo o padrão MVC.
 
 Utilização de HTML e CSS com templates renderizados pelo Flask.
 
+## Funcionalidades Implementadas
+
+* HU01 – Inserção de receitas
+* HU02 – Inserção de despesas
+* HU03 – Edição e exclusão de lançamentos
+* HU04 – Classificação por categorias
+* HU09 – Metas financeiras
+* HU15 – Persistência de dados
+* HU16 – Login e autenticação
+
 ## Funcionalidades em Desenvolvimento
 
-* HU09 – Metas financeiras
-* HU04 – Categorias
-* HU16 – Login de usuário
+* HU06 – Relatórios financeiros
+* HU07 – Gráficos por categoria
+* HU11 – Dashboard inicial
+* HU13 – Filtros e pesquisas
+* HU12 – Ajustes de responsividade
 
 ## Observações
 
@@ -277,11 +298,26 @@ O desenvolvimento está sendo guiado pelas histórias de usuário definidas no b
 
 # 12. Evidências do Projeto
 
-Ainda não disponíveis.
+As evidências do desenvolvimento encontram-se registradas nas pastas:
 
-Motivo: Em atualização.  
-Previsão: Sprint 5  
+* `docs/prototipos/`
+* `docs/apresentacao/`
+* `docs/planejamento/`
+
+Entre as evidências atualmente disponíveis estão:
+
+* Telas de Login
+* Telas de Categorias
+* Telas de Metas Financeiras
+* Diagramas de Modelagem
+* Arquitetura do Sistema
+* Quadro de acompanhamento no Jira
+* Documentação das sprints e cronograma
+
+Novas evidências serão adicionadas conforme a evolução das funcionalidades previstas para as próximas sprints.
+
 Responsável: Equipe  
+Status: Em atualização contínua
 
 ---
 
