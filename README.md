@@ -171,7 +171,19 @@ Responsável: Equipe
 
 ## Tela de Categorias
 
-![Tela de Categorias](docs/prototipos/inicial-categorias.png)
+![Tela de Categorias](docs/prototipos/categorias.png)
+
+---
+
+## Tela de Despesas
+
+![Tela de Categorias](docs/prototipos/despesas.png)
+
+---
+
+## Tela de Receitas
+
+![Tela de Categorias](docs/prototipos/receitas.png)
 
 ---
 
