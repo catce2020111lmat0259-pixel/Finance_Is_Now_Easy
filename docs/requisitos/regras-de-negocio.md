@@ -21,41 +21,47 @@
 - O sistema deve permitir criar novas categorias.
 
 ## HU05 - Resumo por categoria
-- O sistema deve agrupar despesas por categoria.
-- O sistema deve exibir o total gasto por categoria.
-- O sistema deve permitir filtragem por período.
+- O sistema deve agrupar automaticamente as despesas por categoria.
+- O sistema deve exibir o total e o percentual gasto em cada categoria.
+- O sistema deve permitir filtragem por mês e ano.
+- O sistema deve utilizar essas informações nos gráficos financeiros.
 
 ## HU06 - Relatório mensal
-- O sistema deve exibir relatório com receitas, despesas e saldo.
-- O sistema deve permitir exportar dados (CSV ou PDF).
-- O relatório deve conter todos os lançamentos do período.
+- O sistema deve gerar um relatório financeiro em PDF.
+- O relatório deve apresentar receitas, despesas e saldo do período.
+- O relatório deve incluir uma análise automática da situação financeira.
+- O relatório deve apresentar gráfico comparativo e resumo mensal.
+- O relatório deve conter todos os lançamentos do período selecionado.
 
 ## HU07 - Gráficos
-- O sistema deve exibir gráficos de pizza e/ou barras por categoria.
-- O sistema deve apresentar visualização proporcional dos gastos.
-- O sistema deve informar quando não houver dados disponíveis.
+- O sistema deve gerar gráficos de pizza para receitas e despesas.
+- O sistema deve utilizar as cores personalizadas das categorias.
+- O sistema deve apresentar legenda, valores e percentuais.
+- O sistema deve informar quando não existirem dados para o período.
 
 ## HU08 - Comparativo mensal
-- O sistema deve exibir comparativo de gastos entre meses.
-- O sistema deve permitir filtro por período.
-- O sistema deve informar quando não houver registros no período.
+- O sistema deve comparar receitas, despesas e saldo entre os meses.
+- O sistema deve permitir seleção do ano.
+- O sistema deve apresentar gráfico comparativo e tabela anual.
+- O sistema deve informar quando não existirem registros.
 
 ## HU09 - Metas financeiras
-- O sistema deve permitir criar metas financeiras personalizadas.
+- O sistema deve permitir criar metas financeiras.
 - O sistema deve listar metas cadastradas.
 - O sistema deve permitir editar metas.
 - O sistema deve permitir excluir metas.
-- O sistema deve exibir o status das metas (em andamento, concluída, não atingida).
+- O sistema deve permitir definir uma meta principal para exibição na Dashboard.
 
 ## HU10 - Avisos de orçamento
-- O sistema deve alertar quando o limite de orçamento for ultrapassado.
-- O sistema deve emitir aviso preventivo ao atingir percentual do limite.
-- O sistema deve indicar quando não houver limite definido.
+- O sistema deve identificar automaticamente despesas pendentes.
+- O sistema deve identificar receitas não recebidas.
+- O sistema deve atualizar os avisos automaticamente.
+- O sistema deve informar quando não existirem pendências.
 
 ## HU11 - Dashboard
-- O sistema deve exibir saldo atual, receitas e despesas.
-- O sistema deve exibir valores zerados quando não houver dados.
-- O sistema deve atualizar os dados automaticamente.
+- O sistema deve apresentar a meta principal.
+- O sistema deve apresentar avisos financeiros.
+- O sistema deve apresentar as últimas movimentações.
 
 ## HU12 - Interface responsiva
 - O sistema deve se adaptar a diferentes tamanhos de tela.
@@ -63,9 +69,10 @@
 - O sistema deve exibir feedback visual das ações do usuário.
 
 ## HU13 - Filtros
-- O sistema deve permitir filtro por categoria.
-- O sistema deve permitir filtro por período.
-- O sistema deve informar quando não houver resultados.
+- O sistema deve permitir pesquisa textual.
+- O sistema deve permitir navegação entre meses.
+- O sistema deve atualizar automaticamente os resultados.
+- O sistema deve informar quando não existirem registros.
 
 ## HU14 - Persistência de dados
 - O sistema deve salvar dados automaticamente.
