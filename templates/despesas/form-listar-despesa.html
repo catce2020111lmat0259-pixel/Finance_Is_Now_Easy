@@ -1,0 +1,236 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Despesas
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Despesas</h1>
+            <p class="lead">Acompanhe seus gastos e pagamentos</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card summary-card despesa-summary summary-card-top">
+
+    <div class="month-nav">
+        <a href="{{ url_for('listar_despesas', mes=context.mes_anterior, ano=context.ano_anterior) }}" class="month-arrow">‹</a>
+        <h2>{{ context.nome_mes }}</h2>
+        <a href="{{ url_for('listar_despesas', mes=context.mes_proximo, ano=context.ano_proximo) }}" class="month-arrow">›</a>
+    </div>
+
+    <div class="summary-row">
+
+        <div class="summary-box">
+            <span class="material-symbols-outlined lista">shopping_bag</span>
+            <div>
+                <strong>Total pendente</strong>
+                <div class="summary-value">
+                    R$ {{ "%.2f"|format(context.total_pendente)|replace(".", ",") }}
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <span class="material-symbols-outlined lista">account_balance_wallet</span>
+            <div>
+                <strong>Total pago</strong>
+                <div class="summary-value">
+                    R$ {{ "%.2f"|format(context.total_pago)|replace(".", ",") }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="card summary-card-bottom">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Pesquisa e busca</h2>
+            <div class="meta">Você pode filtrar as suas despesas por palavra-chave</div>
+        </div>
+    </div>
+    <section class="filter-panel">
+        <form action="{{ url_for('listar_despesas') }}" method="GET" class="filter-box">
+
+            <div class="form-row">
+                <input type="text" id="busca" name="busca" placeholder="Ex: mercado, pix..." value="{{ context.busca if context and context.busca else '' }}">
+                <button class="btn" type="submit">Buscar</button>
+            </div>
+
+            <details class="filter-details">
+                <summary>Filtros</summary>
+
+                <div class="form-row">
+                    <label for="categoria_id">Categoria</label>
+                    <select id="categoria_id" name="categoria_id">
+                        <option value="">Todas</option>
+
+                        {% if context and context.categorias %}
+                            {% for categoria in context.categorias %}
+                                <option value="{{ categoria.id }}" {% if context.categoria_id and context.categoria_id|int == categoria.id %}selected{% endif %}>
+                                    {{ categoria.nome }}
+                                </option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label for="status">Status</label>
+                    <select id="status" name="status">
+                        <option value="">Todos</option>
+                        <option value="pago" {% if context and context.status == "pago" %}selected{% endif %}>Pago</option>
+                        <option value="pendente" {% if context and context.status == "pendente" %}selected{% endif %}>Pendente</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <button class="btn-filter btn-apply" type="submit">Aplicar</button>
+                    <a class="btn-filter btn-clear" href="{{ url_for('listar_despesas') }}" style="text-decoration:none">Limpar</a>
+                </div>
+            </details>
+
+        </form>
+    </section>
+</section>
+
+<section class="card">
+    <h2 style="text-align:center">Despesas</h2>
+    <hr class="section-divider">
+
+    {% if context and context.despesas_por_dia %}
+        <div class="list">
+
+            {% for dia, despesas in context.despesas_por_dia.items() %}
+
+                <h2 class="day-title">{{ dia }}</h2>
+
+                {% for despesa in despesas %}
+                    <a class="expense-item" href="{{ url_for('editar_despesa', id=despesa.id) }}" style="text-decoration:none;color:inherit">
+
+                        <div class="expense-left">
+
+                            <span class="material-symbols-outlined expense-icon">
+                                
+                            </span>
+
+                            <div class="expense-info">
+                                <strong>
+                                    {{ despesa.categoria.nome }}
+                                </strong>
+
+                                <div class="meta">
+                                    {% if despesa.descricao %}
+                                        {{ despesa.descricao }} | Despesa
+                                    {% else %}
+                                        {{ despesa.categoria.nome }} | Despesa
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="expense-right">
+
+                            <div class="meta" style="color:#fa0000; font-weight:700">
+                                R$ {{ "%.2f"|format(despesa.valor)|replace(".", ",") }}
+                            </div>
+
+                            {% if despesa.pago %}
+                                <div class="expense-status paid">
+                                    <span class="material-symbols-outlined">
+                                        check_circle
+                                    </span>
+                                </div>
+                            {% else %}
+                                <div class="expense-status pending">
+                                    <span class="material-symbols-outlined">
+                                        pending
+                                    </span>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </a>
+                {% endfor %}
+
+            {% endfor %}
+
+        </div>
+    {% elif context and context.busca %}
+        <div class="empty-state">
+            <span class="material-symbols-outlined">find_in_page</span>
+
+            <strong>Nenhuma despesa encontrada.</strong>
+
+            <div class="meta">
+                Não encontramos resultados para
+                "<span class="pesquisa-termo">{{ context.busca }}</span>".
+            </div>
+        </div>
+
+    {% elif context and (context.categoria_id or context.status) %}
+        <div class="empty-state">
+            <span class="material-symbols-outlined">filter_alt_off</span>
+
+            <strong>Nenhuma despesa encontrada.</strong>
+
+            <div class="meta">
+                Nenhum resultado corresponde aos filtros selecionados.
+            </div>
+        </div>
+    
+    {% else %}
+        <div class="empty-state">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <strong>Ops! Você não possui despesas registradas nesse mês.</strong>
+            <div class="meta">Para criar uma nova despesa, clique no botão de adicionar.</div>
+        </div>
+    {% endif %}
+
+</section>
+
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        <a class="menu-item" href="{{ url_for('home') }}">
+            <span class="material-symbols-outlined">home</span>
+            <strong>Principal</strong>
+        </a>
+
+        <a class="menu-item active-despesa" href="{{ url_for('listar_transacoes') }}">
+            <span class="material-symbols-outlined">list_alt</span>
+            <strong>Transações</strong>
+        </a>
+
+        <a class="menu-add active-despesa" href="{{ url_for('criar_despesa') }}">
+            <span class="material-symbols-outlined">add</span>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+    </div>
+
+</section>
+
+{% endblock %}

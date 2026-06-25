@@ -1,0 +1,252 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Sobre o FINE
+{% endblock %}
+
+{% block page_header %}
+<header>
+    {% include 'partials/logo.html' %}
+    <div>
+        <h1>Sobre o FINE</h1>
+        <p class="lead">Finance Is Now Easy - Um sistema web de controle financeiro pessoal</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card summary-card sobre-summary summary-card-top">
+
+    <h2 class="card-subtitle">Conhecendo mais sobre o Sistema</h2>
+
+    <div class="item item-categoria">
+        <div class="item-categoria-header">
+            <span class="material-symbols-outlined mais">info</span>
+            <strong>Objetivo do projeto</strong>
+        </div>
+        <div>
+            Ajudar o usuário a registrar receitas, despesas, categorias e metas, oferecendo uma visão clara da sua vida financeira.
+        </div>
+    </div>
+
+</section>
+
+<section class="card summary-card-bottom">
+
+    <h2 style="text-align:left">Sobre</h2>
+
+    <hr class="section-divider">
+
+    <div class="list">
+
+        <div class="item">
+            <strong>Versão</strong>
+            <div class="meta">
+                FINE v1.0
+            </div>
+        </div>
+
+        <div class="item">
+            <strong>Tecnologias</strong>
+            <div class="meta">
+                Python, Flask, HTML, CSS, JavaScript, SQLAlchemy, SQLite e Chart.js.
+            </div>
+        </div>
+
+        <div class="item">
+            <strong>Licença</strong>
+            <div class="meta">
+                Projeto acadêmico desenvolvido para fins educacionais.
+            </div>
+        </div>
+
+        <div class="item">
+            <strong>Última atualização</strong>
+            <div class="meta">
+                Junho de 2026.
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 style="text-align:left">Funcionalidades</h2>
+
+    <hr class="section-divider">
+
+    <div class="list">
+        <div class="item item-categoria">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">payments</span>
+                <strong>Gestão de receitas</strong>
+            </div>
+
+            <div class="meta">
+                Registre, edite, exclua e acompanhe todos os seus recebimentos mensais.
+            </div>
+        </div>
+
+        <div class="item item-categoria">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <strong>Gestão de despesas</strong>
+            </div>
+
+            <div class="meta">
+                Controle gastos, pagamentos e despesas pendentes de forma organizada.
+            </div>
+        </div>
+
+        <div class="item item-categoria">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">category</span>
+                <strong>Categorias personalizadas</strong>
+            </div>
+
+            <div class="meta">
+                Organize receitas e despesas utilizando categorias com cores personalizadas.
+            </div>
+        </div>
+
+        <div class="item item-categoria">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">flag</span>
+                <strong>Metas financeiras</strong>
+            </div>
+
+            <div class="meta">
+                Defina objetivos financeiros e acompanhe seu progresso ao longo do tempo.
+            </div>
+        </div>
+
+        <div class="item item-categoria">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">query_stats</span>
+                <strong>Gráficos e comparativos</strong>
+            </div>
+
+            <div class="meta">
+                Analise receitas, despesas e comparativos mensais por meio de gráficos interativos.
+            </div>
+        </div>
+
+        <div class="item item-categoria">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">summarize</span>
+                <strong>Relatórios</strong>
+            </div>
+
+            <div class="meta">
+                Exporte relatórios financeiros para acompanhar sua movimentação e evolução.
+            </div>
+        </div>
+
+        <div class="item item-categoria">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">lock</span>
+                <strong>Login e segurança</strong>
+            </div>
+
+            <div class="meta">
+                Autenticação de usuários com acesso individual aos dados financeiros.
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 style="text-align:left">Equipe</h2>
+
+    <hr class="section-divider">
+
+    <div class="list">
+
+        <div class="item">
+            <strong>Projeto</strong>
+            <div class="meta">
+                Finance Is Now Easy (FINE)
+            </div>
+        </div>
+
+        <div class="item">
+            <strong>Curso</strong>
+            <div class="meta">
+                Curso Técnico em Desenvolvimento de Sistemas
+            </div>
+        </div>
+
+        <div class="item">
+            <strong>Instituição</strong>
+            <div class="meta">
+                Instituto Federal do Piauí (IFPI)
+            </div>
+        </div>
+
+        <div class="item">
+            <strong>Desenvolvedor</strong>
+            <div class="meta">
+                Gabriel Lopes da Silva
+            </div>
+        </div>
+
+        <div class="item">
+            <strong>Professor orientador</strong>
+            <div class="meta">
+                Ely Miranda
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block navigation %}
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        {% include "partials/navigation-left.html" %}
+
+        <div class="menu-add-wrapper">
+
+            <div class="menu-add-options" id="menu-add-options">
+
+                <a class="menu-add-option receita" href="{{ url_for('criar_receita') }}">
+                    <span class="material-symbols-outlined">arrow_circle_up</span>
+                    <span>Receita</span>
+                </a>
+
+                <a class="menu-add-option despesa" href="{{ url_for('criar_despesa') }}">
+                    <span class="material-symbols-outlined">arrow_circle_down</span>
+                    <span>Despesa</span>
+                </a>
+
+            </div>
+
+            <button type="button" class="menu-add active-transacao" id="menu-add-button">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+
+        </div>
+
+        <a class="menu-item" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+        
+        <a class="menu-item active" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+    </div>
+
+</section>
+{% endblock %}

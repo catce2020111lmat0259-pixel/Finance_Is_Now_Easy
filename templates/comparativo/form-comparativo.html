@@ -1,0 +1,159 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Comparativo
+{% endblock %}
+
+{% block page_header %}
+<header>
+    {% include 'partials/logo.html' %}
+    <div>
+        <h1>Comparativo</h1>
+        <p class="lead">Comparativo de receitas e despesas</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card summary-card comparativo-summary page-summary">
+
+    <div class="month-nav">
+        <a href="{{ url_for('comparativo_mensal', ano=context.ano_anterior) }}" class="month-arrow">‹</a>
+
+        <h2>{{ context.ano }}</h2>
+
+        <a href="{{ url_for('comparativo_mensal', ano=context.ano_proximo) }}" class="month-arrow">›</a>
+    </div>
+
+    <div class="summary-row home-summary">
+
+        <div class="summary-box">
+            <span class="material-symbols-outlined lista">arrow_circle_up</span>
+            <div>
+                <strong>Receitas do ano</strong>
+                <div class="summary-value">
+                    R$ {{ "%.2f"|format(context.total_receitas_ano)|replace(".", ",") }}
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <span class="material-symbols-outlined lista">arrow_circle_down</span>
+            <div>
+                <strong>Despesas do ano</strong>
+                <div class="summary-value">
+                    R$ {{ "%.2f"|format(context.total_despesas_ano)|replace(".", ",") }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="card page-content">
+    <h2>Comparativo entre meses</h2>
+    <div class="meta">
+        Acompanhe a evolução das suas receitas, despesas e saldo ao longo do ano.
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="chart-line-box">
+        <canvas id="grafico-comparativo"></canvas>
+    </div>
+
+    <div
+        id="dados-grafico-comparativo"
+        data-labels='{{ context.meses|tojson }}'
+        data-receitas='{{ context.receitas|tojson }}'
+        data-despesas='{{ context.despesas|tojson }}'
+        data-saldo='{{ context.saldo|tojson }}'
+    ></div>
+
+    <div class="chart-description">
+        Este gráfico mostra a variação mensal entre receitas, despesas e saldo.
+    </div>
+</section>
+
+<section class="card">
+    <h2>Resumo mensal</h2>
+
+    <div class="monthly-table">
+
+        <div class="monthly-row monthly-head">
+            <strong>Mês</strong>
+            <strong>Receitas</strong>
+            <strong>Despesas</strong>
+            <strong>Saldo</strong>
+        </div>
+
+        {% for mes in context.meses %}
+            {% set i = loop.index0 %}
+
+            <div class="monthly-row">
+                <span>{{ mes }}</span>
+
+                <span class="receita-value">
+                    R$ {{ "%.2f"|format(context.receitas[i])|replace(".", ",") }}
+                </span>
+
+                <span style="color:#ef4444;font-weight:700">
+                    R$ {{ "%.2f"|format(context.despesas[i])|replace(".", ",") }}
+                </span>
+
+                <span style="font-weight:700">
+                    R$ {{ "%.2f"|format(context.saldo[i])|replace(".", ",") }}
+                </span>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}
+
+{% block navigation %}
+<section class="card">
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        {% include 'partials/navigation-left.html' %}
+
+        <div class="menu-add-wrapper">
+
+            <div class="menu-add-options" id="menu-add-options">
+
+                <a class="menu-add-option receita" href="{{ url_for('criar_receita') }}">
+                    <span class="material-symbols-outlined">arrow_circle_up</span>
+                    <span>Receita</span>
+                </a>
+
+                <a class="menu-add-option despesa" href="{{ url_for('criar_despesa') }}">
+                    <span class="material-symbols-outlined">arrow_circle_down</span>
+                    <span>Despesa</span>
+                </a>
+
+            </div>
+
+            <button type="button" class="menu-add active-transacao" id="menu-add-button">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+
+        </div>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+        
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+    </div>
+</section>
+{% endblock %}

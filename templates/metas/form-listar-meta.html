@@ -1,0 +1,137 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Metas
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Metas</h1>
+            <p class="lead">Visualize e gerencie suas metas cadastradas</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card summary-card summary summary-card-top">
+    <h2 class="card-subtitle">Metas</h2>
+</section>
+
+<section class="card">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Bem-vindo as metas</h2>
+            <div class="meta">Você pode filtrar as suas metas por palavra-chave</div>
+        </div>
+    </div>
+
+    <form action="{{ url_for('listar_metas') }}" method="GET" class="form-row">
+        <div for="pesquisa"></div>
+
+        <input
+            type="text"
+            id="pesquisa"
+            name="pesquisa"
+            placeholder="Busque por uma palavra ou frase..."
+            value="{{ context.pesquisa if context and context.pesquisa else '' }}"
+        >
+
+        <button class="btn" type="submit">Buscar</button>
+    </form>
+
+</section>
+
+<section class="card">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Suas metas</h2>
+            <div class="meta">Lista de metas cadastradas</div>
+        </div>
+    </div>
+
+    {% if context and context.metas|length > 0 %}
+
+        <div class="metas-lista">
+
+            {% for meta in context.metas %}
+                <div class="meta-item">
+
+                    <a class="meta-texto" href="/fine/metas/editar/{{ meta.id }}" style="text-decoration:none;color:inherit" class="meta-texto">
+                        <strong>Meta {{ loop.index }}</strong>
+                        <span>{{ meta.conteudo }}</span>
+                    </a>
+                    <a class="btn-small meta-fixar" href="{{ url_for('fixar_meta', id=meta.id) }}" title="Definir como principal">
+                        <span class="material-symbols-outlined">
+                            {% if meta.fixada %}
+                                keep
+                            {% else %}
+                                keep_off
+                            {% endif %}
+                        </span>
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    {% elif context and context.pesquisa %}
+
+        <div class="empty-state">
+            <span class="material-symbols-outlined">find_in_page</span>
+
+            <strong>Nenhuma meta encontrada.</strong>
+
+            <div class="meta">
+                Não encontramos resultados para "<span class="pesquisa-termo">{{ context.pesquisa }}</span>".
+            </div>
+        </div>
+        
+    {% else %}
+
+        <div class="empty-state">
+            <span class="material-symbols-outlined">emoji_events</span>
+
+            <strong>Ops! Você não possui metas cadastradas.</strong>
+
+            <div class="meta">
+                Para criar sua primeira meta, clique no botão de adicionar.
+            </div>
+        </div>
+
+    {% endif %}
+
+</section>
+
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu meta-menu">
+
+        {% include 'partials/navigation-left.html' %}
+
+        <a class="menu-add menu-add-meta" href="/fine/metas/criar">
+            <span class="material-symbols-outlined">add</span>
+        </a>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

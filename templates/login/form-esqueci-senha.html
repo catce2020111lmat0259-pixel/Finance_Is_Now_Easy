@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+</head>
+<body>
+
+    <div class="container auth-create">
+
+        <header>
+
+            <div class="logo">
+                <a href="{{ url_for('login') }}"
+                   style="text-decoration:none;color:inherit">
+                    FINE
+                </a>
+            </div>
+
+            <div>
+                <h1>Recuperação de Senha</h1>
+                <p class="lead">
+                    Esqueci minha senha e preciso recuperar
+                </p>
+            </div>
+
+        </header>
+
+        <main>
+
+            <section class="card auth-create">
+
+                <div class="auth-page-title" style="display:flex;gap:10px;margin-bottom:16px">
+                    <span class="material-symbols-outlined">key</span>
+                    <h2>Recuperar senha</h2>
+
+                </div>
+
+                <div class="meta" style="margin-bottom:16px">
+                    Preencha os dados abaixo para prosseguir com a recuperação da conta.
+                </div>
+
+                <hr class="section-divider">
+
+                <form action="/fine/recuperacao/senha/verificar"
+                      method="POST"
+                      class="auth-form">
+
+                    <div class="auth-field">
+                        <label for="email">Email</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite seu email"
+                            required
+                        >
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="data_nascimento">
+                            Data de nascimento
+                        </label>
+
+                        <input
+                            type="date"
+                            id="data_nascimento"
+                            name="data_nascimento"
+                            required
+                        >
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="pergunta_secreta">
+                            Pergunta de segurança
+                        </label>
+
+                        <select
+                            id="pergunta_secreta"
+                            name="pergunta_secreta"
+                            required
+                        >
+                            <option value="">Selecione</option>
+
+                            <option value="pet">
+                                Nome do seu primeiro animal de estimação
+                            </option>
+
+                            <option value="escola">
+                                Nome da sua primeira escola
+                            </option>
+
+                            <option value="cidade">
+                                Cidade onde você nasceu
+                            </option>
+
+                            <option value="personagem">
+                                Seu personagem favorito
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="resposta_secreta">
+                            Resposta
+                        </label>
+
+                        <input
+                            type="text"
+                            id="resposta_secreta"
+                            name="resposta_secreta"
+                            placeholder="Digite sua resposta"
+                            required
+                        >
+                    </div>
+
+                    <button class="btn auth-btn" type="submit">
+                        Verificar
+                    </button>
+
+                </form>
+
+                {% if context and context.erros %}
+
+                    <div class="status error" style="margin-top:16px">
+                        <div class="dot"></div>
+
+                        <div>
+                            <strong>Erro na verificação</strong>
+
+                            {% for erro in context.erros %}
+                                <div class="meta">{{ erro }}</div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+                <hr class="section-divider">
+
+                <div class="auth-links">
+
+                    <div class="auth-register">
+
+                        <span>Lembrou sua senha?</span>
+
+                        <a href="{{ url_for('login') }}">
+                            Entrar
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

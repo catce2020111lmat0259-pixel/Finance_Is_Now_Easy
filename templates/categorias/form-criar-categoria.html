@@ -1,0 +1,157 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Categorias
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Categorias</h1>
+            <p class="lead">Crie uma nova categoria para suas receitas e despesas</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<section class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Adicionar categoria</h2>
+        </div>
+    </div>
+
+    <form id="form-categoria" action="/fine/categorias/salvar" method="POST">
+        <div class="form-row">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" value="{{ context.categoria.nome if context and context.categoria else '' }}" placeholder="Ex: Transporte Público">
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="form-row">
+            <label for="descricao">Descrição</label>
+            <input id="descricao" name="descricao" type="text" value="{{ context.categoria.descricao if context and context.categoria else '' }}" placeholder="Opcional. Ex: Ônibus, metrô e aplicativos">
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="form-row">
+            <label for="cor">Cor</label>
+
+            <input
+                type="color"
+                id="cor"
+                name="cor"
+                value="{{ context.categoria.cor if context and context.categoria else '#585858' }}"
+            >
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="form-row">
+            <label>Tipo</label>
+
+            <div class="radio-group">
+                <label style="font-size:14px">
+                    <input type="radio" name="tipo" value="despesa" {% if context and context.categoria and context.categoria.tipo == "despesa" %}checked{% endif %}>
+                    <span style="margin-left:6px">Despesa</span>
+                </label>
+
+                <label style="font-size:14px">
+                    <input type="radio" name="tipo" value="receita" {% if context and context.categoria and context.categoria.tipo == "receita" %}checked{% endif %}>
+                    <span style="margin-left:6px">Receita</span>
+                </label>
+            </div>
+
+            <div class="form-actions">
+               <button class="btn" type="submit">Salvar</button>
+            </div>
+
+        </div>
+    </form>
+
+    {% if context and context.erros %}
+        <div class="status error" role="status">
+            <div class="dot"></div>
+            <div>
+                <strong>Erro ao criar categoria</strong>
+
+                {% for erro in context.erros %}
+                    <div class="meta">{{ erro }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if context and context.sucesso %}
+        <div class="status success" role="status">
+            <div class="dot"></div>
+            <div>
+                <strong>{{ context.sucesso }}</strong>
+                <div class="meta">A categoria <strong>{{ context.categoria.nome }}</strong> foi adicionada em {{ context.categoria.tipo }}.</div>
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+<section class="card">
+    <div>
+        <h2>Categoria criada</h2>
+
+        {% if context and context.sucesso %}
+            <div class="item highlight2">
+                <strong>{{ context.categoria.nome }}</strong>
+
+                <div class="meta">Tipo: {{ context.categoria.tipo }}</div>
+
+                {% if context.categoria.descricao %}
+                    <div class="meta">{{ context.categoria.descricao }}</div>
+                {% else %}
+                    <div class="meta">Sem descrição adicionada.</div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="item">
+                <strong>Nenhuma categoria criada agora</strong>
+                <div class="meta">Preencha o formulário acima para adicionar uma nova categoria.</div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+        <a class="menu-item" href="{{ url_for('home') }}">
+            <span class="material-symbols-outlined">home</span>
+            <strong>Principal</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('listar_categorias') }}">
+            <span class="material-symbols-outlined">list_alt</span>
+            <strong>Categorias</strong>
+        </a>
+
+        <button class="menu-add menu-add-categoria" form="form-categoria" type="submit">
+            <span class="material-symbols-outlined">check</span>
+        </button>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

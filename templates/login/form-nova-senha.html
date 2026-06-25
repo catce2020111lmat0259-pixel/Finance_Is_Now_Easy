@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Senha</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+</head>
+<body>
+
+    <div class="container auth-create">
+
+        <header>
+
+            <div class="logo">
+                <a href="{{ url_for('login') }}"
+                   style="text-decoration:none;color:inherit">
+                    FINE
+                </a>
+            </div>
+
+            <div>
+                <h1>Nova senha</h1>
+                <p class="lead">
+                    Escolha uma nova senha para acessar sua conta.
+                </p>
+            </div>
+
+        </header>
+
+        <main>
+
+            <section class="card auth-create">
+
+                <div class="auth-page-title">
+                    <span class="material-symbols-outlined">
+                        lock_reset
+                    </span>
+
+                    <div>
+                        <div class="meta">Segurança</div>
+                        <h2>Alterar senha</h2>
+                    </div>
+                </div>
+
+                <div class="meta" style="margin-bottom:16px">
+                    Defina uma nova senha para concluir a recuperação da conta.
+                </div>
+
+                <hr class="section-divider">
+
+                <form
+                    action="/fine/recuperacao/senha/nova"
+                    method="POST"
+                    class="auth-form"
+                >
+
+                    <input
+                        type="hidden"
+                        name="usuario_id"
+                        value="{{ context.usuario_id }}"
+                    >
+
+                    <div class="auth-field">
+
+                        <label for="senha">
+                            Nova senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            minlength="6"
+                            placeholder="Digite sua nova senha"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="auth-field">
+
+                        <label for="confirmar_senha">
+                            Confirmar senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmar_senha"
+                            name="confirmar_senha"
+                            minlength="6"
+                            placeholder="Digite novamente a senha"
+                            required
+                        >
+
+                    </div>
+
+                    <button class="btn auth-btn" type="submit">
+                        Salvar nova senha
+                    </button>
+
+                </form>
+
+                {% if context and context.erros %}
+                    <div class="status error" style="margin-top:16px">
+                        <div class="dot"></div>
+
+                        <div>
+
+                            <strong>
+                                Não foi possível alterar a senha
+                            </strong>
+
+                            {% for erro in context.erros %}
+                                <div class="meta">
+                                    {{ erro }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                {% endif %}
+
+                <hr class="section-divider">
+
+                <div class="auth-links">
+
+                    <div class="auth-register">
+
+                        <span>
+                            Lembrou sua senha?
+                        </span>
+
+                        <a href="{{ url_for('login') }}">
+                            Entrar
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

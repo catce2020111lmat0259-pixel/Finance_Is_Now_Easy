@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-page">
+
+    <main class="auth-shell">
+
+        <section class="auth-hero">
+
+            <div class="auth-brand">
+                <div class="logo">FINE</div>
+                <div class="auth-brand-text"><h1>Finance Is Now Easy</h1></div>
+            </div>
+
+            <p>
+                Um software desenvolvido durante o Curso Técnico em Desenvolvimento de Sistemas do IFPI.
+            </p>
+            <img class="auth-img" src="/static/img/capa-login.png" alt="Imagem ilustrativa de um cofrinho">
+        </section>
+
+        <section class="auth-card">
+
+            <h1>Entrar</h1>
+            <p class="lead">Acesse sua conta para continuar</p>
+
+            <form action="/fine/login/autenticar" method="POST" class="auth-form">
+
+                <div class="auth-field">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" placeholder="seu@gmail.com" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="senha">Senha</label>
+                    <input id="senha" type="password" name="senha" placeholder="Sua senha" required>
+                </div>
+
+                <button class="btn auth-btn" type="submit">Entrar</button>
+
+            </form>
+
+            {% if context and context.erros %}
+                {% for erro in context.erros %}
+                    <div style="margin-top: 1rem" class="error">{{ erro }}</div>
+                {% endfor %}
+            
+            {% endif %}
+
+            <div class="auth-links">
+                <div class="auth-register">
+                    <span>Não possui conta?</span>
+                    <a href="{{ url_for('criar_usuario') }}">Cadastre-se</a>
+                </div>
+                
+                <a href="{{ url_for('esqueci_senha') }}">Esqueceu sua senha?</a>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

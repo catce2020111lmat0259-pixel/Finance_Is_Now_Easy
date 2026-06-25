@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Usuário</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container auth-create">
+
+        <header>
+
+            <div class="logo">
+                <a href="{{ url_for('login') }}"
+                   style="text-decoration:none;color:inherit">
+                    FINE
+                </a>
+            </div>
+
+            <div>
+                <h1>Criar conta</h1>
+                <p class="lead">
+                    Cadastre-se para começar a organizar suas finanças.
+                </p>
+            </div>
+
+        </header>
+
+        <main>
+
+            <section class="card auth-create">
+
+                <h2 style="text-align:center; font-size: 22px; margin-bottom: 16px">Novo usuário</h2>
+
+                <div class="meta" style="margin-bottom:16px">
+                    Preencha os dados abaixo para criar sua conta e acessar o FINE.
+                </div>
+
+                <hr class="section-divider">
+
+                <form action="/fine/usuarios/salvar"
+                      method="POST"
+                      class="auth-form">
+
+                    <div class="auth-field">
+                        <label for="nome">Nome</label>
+                        <input type="text"
+                               id="nome"
+                               name="nome"
+                               placeholder="Digite um nome para seu usuário" required>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="email">Email</label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Digite seu email" required>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="senha">Senha</label>
+                        <input type="password"
+                               id="senha"
+                               name="senha"
+                               placeholder="Crie uma senha" required>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="data_nascimento">
+                            Data de nascimento
+                        </label>
+
+                        <input type="date"
+                               id="data_nascimento"
+                               name="data_nascimento" required>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="pergunta_secreta">
+                            Pergunta de segurança
+                        </label>
+
+                        <select id="pergunta_secreta"
+                                name="pergunta_secreta" required>
+
+                            <option value="">Selecione</option>
+
+                            <option value="pet">
+                                Nome do seu primeiro animal de estimação
+                            </option>
+
+                            <option value="escola">
+                                Nome da sua primeira escola
+                            </option>
+
+                            <option value="cidade">
+                                Cidade onde você nasceu
+                            </option>
+
+                            <option value="personagem">
+                                Seu personagem favorito
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="resposta_secreta">
+                            Resposta
+                        </label>
+
+                        <input type="text"
+                               id="resposta_secreta"
+                               name="resposta_secreta"
+                               placeholder="Digite sua resposta" required>
+                    </div>
+
+                    <button class="btn auth-btn" type="submit">
+                        Criar conta
+                    </button>
+
+                </form>
+
+                {% if context and context.erros %}
+                    
+                    <div class="status error" style="margin-top:16px">
+                        <div class="dot"></div>
+                        <div>
+                            <strong>Erro ao criar conta</strong>
+                            {% for erro in context.erros %}
+                                <div class="meta">{{ erro }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if context and context.sucesso %}
+                    <div class="status success">
+                        <div class="dot"></div>
+
+                        <div>
+                            <strong>{{ context.sucesso }}</strong>
+
+                            <div class="meta">
+                                Sua conta foi criada com sucesso.
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <hr class="section-divider">
+
+                <div class="auth-links">
+
+                    <div class="auth-register">
+                        <span>Já possui conta?</span>
+
+                        <a href="{{ url_for('login') }}">
+                            Entrar
+                        </a>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

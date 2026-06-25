@@ -1,0 +1,287 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Home-FINE
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo-home.html' %}
+    </header>
+{% endblock %}
+
+{% block content %}
+<section class="card home-balance-card">
+
+    <div class="month-nav">
+        <a href="{{ url_for('home', mes=context.mes_anterior, ano=context.ano_anterior) }}" class="month-arrow">‹</a>
+
+        <h2>{{ context.nome_mes }} {{ context.ano }}</h2>
+
+        <a href="{{ url_for('home', mes=context.mes_proximo, ano=context.ano_proximo) }}" class="month-arrow">›</a>
+    </div>
+
+    <div class="home-balance">
+        <div class="meta">Saldo em contas</div>
+
+        <strong class="home-balance-value money-counter" data-valor="{{ context.saldo if context and context.saldo else 0 }}">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+    <div class="summary-row home-summary">
+
+        <a class="summary-box" href="{{ url_for('listar_receitas', mes=context.mes, ano=context.ano) }}">
+            <span class="material-symbols-outlined receita-text " style="font-size: 60px">arrow_circle_up</span>
+            <div>
+                <strong>Receitas</strong>
+                <div class="summary-value receita-value">
+                    R$ {{ "%.2f"|format(context.total_receitas if context and context.total_receitas else 0)|replace(".", ",") }}
+                </div>
+            </div>
+        </a>
+
+        <a class="summary-box" href="{{ url_for('listar_despesas', mes=context.mes, ano=context.ano) }}">
+            <span class="material-symbols-outlined" style="color:#ef4444; font-size: 60px">arrow_circle_down</span>
+            <div>
+                <strong>Despesas</strong>
+                <div class="summary-value" style="color:#ef4444">
+                    R$ {{ "%.2f"|format(context.total_despesas if context and context.total_despesas else 0)|replace(".", ",") }}
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+<h2 class="home-section-title">Meta Principal</h2>
+<section class="card">
+    {% if context and context.meta_fixada %}
+        <div class="item">
+            <strong>{{ context.meta_fixada.conteudo }}</strong>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <span class="material-symbols-outlined">flag</span>
+            <strong>Nenhuma meta fixada.</strong>
+            <div class="meta">Escolha uma meta para acompanhar na tela inicial.</div>
+        </div>
+    {% endif %}
+</section>
+
+{% if context and context.qtd_despesas_pendentes or context and context.qtd_receitas_pendentes %}
+
+<h2 class="home-section-title">Pendências e alertas</h2>
+<section class="home-alert-grid">
+
+    <a class="home-alert-card" href="{{ url_for('listar_despesas', status='pendente', mes=context.mes, ano=context.ano) }}">
+
+        <img src="{{ url_for('static', filename='img/seta.png') }}" class="alert-arrow-img down" alt="Despesas">
+        <span class="alert-badge danger">+{{ context.qtd_despesas_pendentes if context and context.qtd_despesas_pendentes else 0 }}</span>
+
+        <div>
+            <strong>Despesas pendentes</strong>
+            <div class="home-alert-value danger">
+                R$ {{ "%.2f"|format(context.total_a_pagar if context and context.total_a_pagar else 0)|replace(".", ",") }}
+            </div>
+        </div>
+
+    </a>
+
+    <a class="home-alert-card" href="{{ url_for('listar_receitas', status='pendente', mes=context.mes, ano=context.ano) }}">
+
+        <img src="{{ url_for('static', filename='img/seta.png') }}" class="alert-arrow-img up" alt="Receitas">
+        <span class="alert-badge success">+{{ context.qtd_receitas_pendentes if context and context.qtd_receitas_pendentes else 0 }}</span>
+
+        <div>
+            <strong>Receitas pendentes</strong>
+            <div class="home-alert-value success">
+                R$ {{ "%.2f"|format(context.total_a_receber if context and context.total_a_receber else 0)|replace(".", ",") }}
+            </div>
+        </div>
+
+    </a>
+
+</section>
+{% endif %}
+
+<h2 class="home-section-title">Contas</h2>
+<section class="card">
+    <div class="account-row">
+        <span class="material-symbols-outlined receita-text">account_balance_wallet</span>
+
+        <div>
+            <strong>Carteira</strong>
+            <div class="receita-value">
+                R$ {{ "%.2f"|format(context.saldo if context and context.saldo else 0)|replace(".", ",") }}
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="account-total">
+        <strong>Total</strong>
+        <strong>
+            R$ {{ "%.2f"|format(context.saldo if context and context.saldo else 0)|replace(".", ",") }}
+        </strong>
+    </div>
+</section>
+
+<h2 class="home-section-title">Despesas por categoria</h2>
+<section class="card chart-card">
+    {% if context and context.despesas_por_categoria %}
+
+        <div class="chart-content">
+
+            <div class="chart-box">
+                <canvas id="grafico-despesas-categoria"></canvas>
+            </div>
+
+            <div class="chart-legend">
+
+                {% for nome, dados in context.despesas_por_categoria.items() %}
+                    <div class="chart-legend-item">
+
+                        <div class="chart-legend-left">
+                            <span
+                                class="chart-dot"
+                                style="background-color: {{ dados.cor }}">
+                            </span>
+
+                            <strong>{{ nome }}</strong>
+                        </div>
+
+                        <div class="chart-value">
+                            <span class="chart-money">
+                                R$ {{ "%.2f"|format(dados.valor)|replace(".", ",") }}
+                            </span>
+
+                            <span class="chart-percent">
+                                ({{ "%.1f"|format(dados.porcentagem)|replace(".", ",") }}%)
+                            </span>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div
+            id="dados-grafico-despesas"
+            data-labels='{{ context.despesas_por_categoria.keys()|list|tojson }}'
+            data-valores='{{ context.despesas_por_categoria.values()|map(attribute="valor")|list|tojson }}'
+            data-cores='{{ context.despesas_por_categoria.values()|map(attribute="cor")|list|tojson }}'
+        ></div>
+
+        <div class="chart-description">
+            Entenda como suas despesas estão distribuídas e identifique onde é possível reduzir custos.
+        </div>
+
+    {% else %}
+        <div class="empty-state">
+            <span class="material-symbols-outlined">pie_chart</span>
+            <strong>Você não tem despesas cadastradas esse mês.</strong>
+            <div class="meta">Adicione seus gastos no mês atual para ver seus gráficos.</div>
+        </div>
+    {% endif %}
+</section>
+
+{% if context and context.receitas_por_categoria %}
+<h2 class="home-section-title">Receitas por categoria</h2>
+<section class="card chart-card">
+    {% if context and context.receitas_por_categoria %}
+
+        <div class="chart-content">
+
+            <div class="chart-box">
+                <canvas id="grafico-receitas-categoria"></canvas>
+            </div>
+
+            <div class="chart-legend">
+
+                {% for nome, dados in context.receitas_por_categoria.items() %}
+                    <div class="chart-legend-item">
+
+                        <div class="chart-legend-left">
+                            <span
+                                class="chart-dot"
+                                style="background-color: {{ dados.cor }}">
+                            </span>
+
+                            <strong>{{ nome }}</strong>
+                        </div>
+
+                        <div class="chart-value">
+                            <span class="chart-money">
+                                R$ {{ "%.2f"|format(dados.valor)|replace(".", ",") }}
+                            </span>
+
+                            <span class="chart-percent">
+                                ({{ "%.1f"|format(dados.porcentagem)|replace(".", ",") }}%)
+                            </span>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="chart-description">
+            Acompanhe a origem das suas receitas e veja quais categorias representam a maior parte da sua renda.
+        </div>
+
+        <div
+            id="dados-grafico-receitas"
+            data-labels='{{ context.receitas_por_categoria.keys()|list|tojson }}'
+            data-valores='{{ context.receitas_por_categoria.values()|map(attribute="valor")|list|tojson }}'
+            data-cores='{{ context.receitas_por_categoria.values()|map(attribute="cor")|list|tojson }}'
+        ></div>
+
+    {% else %}
+        <div class="empty-state">
+            <span class="material-symbols-outlined">pie_chart</span>
+            <strong>Opa! Você não tem receitas cadastradas esse mês.</strong>
+            <div class="meta">Adicione suas entradas no mês atual para ver seus gráficos.</div>
+        </div>
+    {% endif %}
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block navigation %}
+<section class="card">
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        <a class="menu-item active" href="{{ url_for('home') }}">
+            <span class="material-symbols-outlined">home</span>
+            <strong>Principal</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('listar_transacoes') }}">
+            <span class="material-symbols-outlined">format_list_bulleted</span>
+            <strong>Transações</strong>
+        </a>
+
+        <a class="menu-add active-transacao" href="{{ url_for('listar_transacoes') }}">
+            <span class="material-symbols-outlined">add</span>
+        </a>
+
+        {% include 'partials/navigation-right.html' %}
+
+    </div>
+</section>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

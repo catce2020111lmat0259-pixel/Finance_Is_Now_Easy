@@ -1,0 +1,128 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Criar meta
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Metas</h1>
+            <p class="lead">Visualize e gerencie suas metas cadastradas</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Criar nova meta</h2>
+        </div>
+    </div>
+
+    <div class="item highlight" style="margin-bottom:14px">
+        <strong>Dica</strong>
+        <div class="meta">
+            Pergunte-se: "Quanto dinheiro eu quero economizar?" ou
+            "Qual é o meu objetivo financeiro?". Use as metas como um
+            lembrete do seu "eu" presente para o seu "eu" futuro.
+        </div>
+    </div>
+
+    <form id="form-metas" action="/fine/metas/salvar" method="POST">
+        <div class="form-row">
+            <label for="meta">Criar uma meta</label>
+
+            <input
+                type="text"
+                id="meta"
+                name="conteudo"
+                placeholder="Ex: Guardar R$ 500 até dezembro"
+                value="{% if context and context.meta %}{{ context.meta.conteudo }}{% endif %}"
+            >
+
+            <button class="btn" type="submit">Salvar</button>
+        </div>
+    </form>
+
+    {% if context and context.erros %}
+        <div class="status error" role="status">
+            <div class="dot"></div>
+            <div>
+                <strong>Erro ao criar meta</strong>
+                <div class="meta">{{ context.erros[0] }}</div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if context and context.sucesso %}
+        <div class="status success" role="status">
+            <div class="dot"></div>
+            <div>
+                <strong>{{ context.sucesso }}</strong>
+                <div class="meta">Sua meta foi cadastrada com sucesso.</div>
+            </div>
+        </div>
+    {% endif %}
+
+</section>
+
+<section class="card">
+
+    <h2>Meta criada</h2>
+
+    {% if context and context.sucesso %}
+        <div class="meta" style="margin-bottom:12px">
+            Esta foi a última meta cadastrada.
+        </div>
+
+        <div class="meta-item">
+            <div class="meta-texto">
+                <strong>Nova meta</strong>
+                <span>{{ context.meta.conteudo }}</span>
+            </div>
+        </div>
+    {% else %}
+        <div class="item">
+            <strong>Nenhuma meta criada agora.</strong>
+
+            <div class="meta">
+                Preencha o formulário acima para adicionar uma nova meta.
+            </div>
+        </div>
+    {% endif %}
+
+</section>
+
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu meta-menu">
+
+        {% include 'partials/navigation-left.html' %}
+
+        <button class="menu-add menu-add-meta" form="form-metas" type="submit">
+            <span class="material-symbols-outlined">check</span>
+        </button>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

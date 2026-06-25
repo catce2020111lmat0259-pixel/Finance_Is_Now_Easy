@@ -1,0 +1,191 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Editar despesa
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Editar despesa</h1>
+            <p class="lead">Altere os dados da despesa</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+
+<section class="expense-value-card" id="valor-card">
+    <div>
+        <div class="expense-label">Valor da despesa</div>
+
+        <div class="expense-value-wrapper">
+            <span class="currency">R$</span>
+            <input
+                class="expense-value"
+                id="valor"
+                name="valor"
+                type="text"
+                inputmode="decimal"
+                placeholder="0,00"
+                form="form-despesa"
+                value="{{ '%.2f'|format(context.despesa.valor)|replace('.', ',') if context and context.despesa else '' }}"
+            >
+        </div>
+    </div>
+
+    <div class="expense-card-actions">
+        <button id="btn-excluir" class="expense-delete-btn" type="button">
+            <span class="material-symbols-outlined">delete</span>
+        </button>
+
+        <strong class="expense-currency-code">BRL</strong>
+    </div>
+</section>
+
+<section class="card expense-card">
+
+    <form id="form-despesa" action="{{ url_for('editar_despesa', id=context.despesa.id) }}" method="POST" data-proteger-saida="true">
+
+        <div class="expense-line status-line">
+            <span class="material-symbols-outlined">check_circle</span>
+
+            <div class="expense-field">
+                <span id="status-texto" class="lead">
+                    {% if context and context.despesa and context.despesa.pago %}
+                        Pago
+                    {% else %}
+                        Não foi pago
+                    {% endif %}
+                </span>
+            </div>
+
+            <label class="switch">
+                <input id="pago" type="checkbox" name="pago" data-texto-ativo="Pago" data-texto-inativo="Não foi pago" {% if context and context.despesa and context.despesa.pago %}checked{% endif %}>
+                <span></span>
+            </label>
+        </div>
+
+        <div class="expense-line date-options">
+            <span class="material-symbols-outlined">calendar_month</span>
+
+            <button type="button" id="btn-hoje" class="date-chip active">Hoje</button>
+            <button type="button" id="btn-ontem" class="date-chip">Ontem</button>
+
+            <label class="date-chip date-chip-input" for="data" id="btn-outros">
+                Outros
+                <input id="data" name="data" type="date" value="{{ context.despesa.data if context and context.despesa else '' }}">
+            </label>
+            
+        </div>
+
+        <div class="expense-line">
+            <span class="material-symbols-outlined">notes</span>
+
+            <label for="descricao">Descrição</label>
+
+            <input
+                id="descricao"
+                name="descricao"
+                type="text"
+                placeholder="Ex: Alimentação"
+                value="{{ context.despesa.descricao if context and context.despesa else '' }}"
+            >
+        </div>
+
+        <div class="expense-line">
+            <span class="material-symbols-outlined">bookmark</span>
+
+            <label for="categoria_id">Categoria</label>
+
+            <select id="categoria_id" name="categoria_id">
+                {% if context and context.categorias %}
+                    {% for categoria in context.categorias %}
+                        <option value="{{ categoria.id }}"
+                            {% if context.despesa and context.despesa.categoria_id == categoria.id %}selected{% endif %}
+                        >
+                            {{ categoria.nome }}
+                        </option>
+                    {% endfor %}
+                {% else %}
+                    <option value="">Nenhuma categoria cadastrada</option>
+                {% endif %}
+            </select>
+        </div>
+
+    </form>
+
+    {% if context and context.erros %}
+        <div class="status error" role="status">
+            <div class="dot"></div>
+            <div>
+                <strong>Erro ao editar despesa</strong>
+
+                {% if context and context.erros %}
+                    <div class="meta">{{ context.erros[0] }}</div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+</section>
+
+<section class="card">
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        <a class="menu-item" href="{{ url_for('home') }}">
+            <span class="material-symbols-outlined">home</span>
+            <strong>Principal</strong>
+        </a>
+
+        <a class="menu-item active-despesa" href="{{ url_for('listar_despesas') }}">
+            <span class="material-symbols-outlined">list_alt</span>
+            <strong>Transações</strong>
+        </a>
+
+        <button class="menu-add menu-check" type="submit" form="form-despesa">
+            <span class="material-symbols-outlined">check</span>
+        </button>
+
+        <a class="menu-item" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+    </div>
+</section>
+    <div id="overlay-excluir" class="overlay">
+        <div class="modal-card">
+            <h3>Excluir despesa</h3>
+            <p>
+                Você deseja realmente excluir esta despesa?
+            </p>
+            <div class="modal-actions">
+                <button id="btn-cancelar" class="btn ghost" type="button">
+                    Não
+                </button>
+                <form
+                    action="{{ url_for('confirmar_exclusao_despesa', id=context.despesa.id) }}"
+                    method="POST"
+                >
+                    <input
+                        type="hidden"
+                        name="confirmar-exclusao"
+                        value="Sim"
+                    >
+                    <button class="btn danger" type="submit">
+                        Sim
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

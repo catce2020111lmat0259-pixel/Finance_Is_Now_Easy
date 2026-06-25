@@ -1,0 +1,231 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Transações
+{% endblock %}
+
+{% block page_header %}
+<header>
+    {% include 'partials/logo.html' %}
+    <div>
+        <h1>Transações</h1>
+        <p class="lead">Acompanhe seus gastos e entradas</p>
+    </div>
+    
+</header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card summary-card transacao-summary summary-card-top">
+
+    <div class="month-nav">
+        <a href="{{ url_for('listar_transacoes', mes=context.mes_anterior, ano=context.ano_anterior) }}" class="month-arrow">‹</a>
+        <h2>{{ context.nome_mes }}</h2>
+        <a href="{{ url_for('listar_transacoes', mes=context.mes_proximo, ano=context.ano_proximo) }}" class="month-arrow">›</a>
+    </div>
+
+    <div class="summary-row">
+
+        <div class="summary-box">
+            <span class="material-symbols-outlined lista">local_atm</span>
+            <div>
+                <strong>Saldo atual</strong>
+                <div class="summary-value">
+                    R$ {{ "%.2f"|format(context.saldo_atual)|replace(".", ",") }}
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <span class="material-symbols-outlined lista">monitoring</span>
+            <div>
+                <strong>Resumo mensal</strong>
+                <div class="summary-value">
+                    R$ {{ "%.2f"|format(context.resumo_mensal)|replace(".", ",") }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="card summary-card-bottom">
+    <h2>Pesquisa e busca</h2>
+    <div class="meta">Pesquise receitas e despesas por palavra-chave.</div>
+
+    <section class="filter-panel">
+        <form action="{{ url_for('listar_transacoes') }}" method="GET" class="filter-box">
+
+            <input type="hidden" name="mes" value="{{ context.mes }}">
+            <input type="hidden" name="ano" value="{{ context.ano }}">
+
+            <div class="form-row">
+                <input
+                    type="text"
+                    id="busca"
+                    name="busca"
+                    placeholder="Ex: mercado, pix, salário..."
+                    value="{{ context.busca if context and context.busca else '' }}"
+                >
+
+                <button class="btn" type="submit">Buscar</button>
+            </div>
+
+        </form>
+    </section>
+</section>
+
+<section class="card">
+
+    <h2 style="text-align:center">Transações</h2>
+    <hr class="section-divider">
+
+    {% if context and context.transacoes_por_dia %}
+        <div class="list">
+
+            {% for dia, transacoes in context.transacoes_por_dia.items() %}
+
+                <h2 class="day-title">{{ dia }}</h2>
+
+                {% for transacao in transacoes %}
+
+                    <a class="expense-item"
+                    href="{% if transacao.tipo == 'receita' %}{{ url_for('editar_receita', id=transacao.id) }}{% else %}{{ url_for('editar_despesa', id=transacao.id) }}{% endif %}"
+                    style="text-decoration:none;color:inherit">
+
+                        <div class="expense-left">
+
+                            
+                            <span class="material-symbols-outlined expense-icon">
+
+                            </span>
+
+                            <div class="expense-info">
+
+                                <strong>
+                                    {{ transacao.categoria }}
+                                </strong>
+
+                                <div class="meta">
+                                    {% if transacao.descricao %}
+                                        {{ transacao.descricao }}
+                                    {% else %}
+                                        {{ transacao.categoria }}
+                                    {% endif %}
+                                    |
+                                    {{ transacao.tipo|capitalize }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="expense-right">
+
+                            {% if transacao.tipo == "receita" %}
+                                <div class="meta receita-value" style="font-weight:700">
+                                    + R$ {{ "%.2f"|format(transacao.valor)|replace(".", ",") }}
+                                </div>
+                            {% else %}
+                                <div class="meta" style="color:#ef4444;font-weight:700">
+                                    - R$ {{ "%.2f"|format(transacao.valor)|replace(".", ",") }}
+                                </div>
+                            {% endif %}
+
+                            {% if transacao.status in ["Recebido", "Pago"] %}
+                                <div class="expense-status paid">
+                                    <span class="material-symbols-outlined">
+                                        check_circle
+                                    </span>
+                                </div>
+                            {% else %}
+                                <div class="expense-status pending">
+                                    <span class="material-symbols-outlined">
+                                        pending
+                                    </span>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </a>
+
+                {% endfor %}
+
+            {% endfor %}
+
+        </div>
+
+    {% elif context and context.busca %}
+
+        <div class="empty-state">
+            <span class="material-symbols-outlined">find_in_page</span>
+
+            <strong>Nenhuma transação encontrada.</strong>
+
+            <div class="meta">
+                Não encontramos resultados para
+                "<span class="pesquisa-termo">{{ context.busca }}</span>".
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <strong>Ops! Você não possui transações registradas nesse mês.</strong>
+            <div class="meta">Crie receitas ou despesas para visualizar suas movimentações.</div>
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
+
+{% block navigation %}
+<section class="card">
+
+    <h2>Navegação</h2>
+    <div class="bottom-menu">
+
+        <a class="menu-item" href="{{ url_for('home') }}">
+            <span class="material-symbols-outlined">home</span>
+            <strong>Principal</strong>
+        </a>
+
+        <a class="menu-item  active" href="{{ url_for('listar_transacoes') }}">
+            <span class="material-symbols-outlined">format_list_bulleted</span>
+            <strong>Transações</strong>
+        </a>
+
+        <div class="menu-add-wrapper">
+
+            <div class="menu-add-options" id="menu-add-options">
+                <a class="menu-add-option receita" href="{{ url_for('criar_receita') }}">
+                    <span class="material-symbols-outlined">arrow_circle_up</span>
+                    <span>Receita</span>
+                </a>
+
+                <a class="menu-add-option despesa" href="{{ url_for('criar_despesa') }}">
+                    <span class="material-symbols-outlined">arrow_circle_down</span>
+                    <span>Despesa</span>
+                </a>
+
+            </div>
+
+            <button type="button" class="menu-add active-transacao" id="menu-add-button">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+
+        </div>
+
+        {% include "partials/navigation-right.html" %}
+
+    </div>
+
+</section>
+
+{% endblock %}

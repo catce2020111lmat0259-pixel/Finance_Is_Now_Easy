@@ -1,0 +1,187 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Mais opções
+{% endblock %}
+
+{% block page_header %}
+<header>
+    {% include 'partials/logo.html' %}
+    <div>
+        <h1>Opções</h1>
+        <p class="lead">Todas as opções do FINE em um lugar</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card summary-card mais-summary summary-card-top">
+
+    <h2 style="font-size:26px; color:#fff; font-weight:700">Mais opções</h2>
+
+    <div class="item-categoria-header">
+        <span class="material-symbols-outlined mais">widget_small</span>
+
+        <div>
+            <strong>Central de funcionalidades</strong>
+            <div>
+                Aqui você encontra ferramentas, configurações e recursos complementares do sistema.
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="card summary-card-bottom">
+
+    <h2 style="text-align:center">Gestão financeira</h2>
+
+    <hr class="section-divider">
+
+    <div class="list">
+
+        <a class="item item-categoria" href="{{ url_for('listar_receitas') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">payments</span>
+                <strong>Receitas</strong>
+            </div>
+
+            <div class="meta">Gerencie todos os seus recebimentos.</div>
+        </a>
+
+        <a class="item item-categoria" href="{{ url_for('listar_despesas') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <strong>Despesas</strong>
+            </div>
+
+            <div class="meta">Visualize e organize seus gastos.</div>
+        </a>
+
+        <a class="item item-categoria" href="{{ url_for('listar_categorias') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">bookmarks</span>
+                <strong>Categorias</strong>
+            </div>
+
+            <div class="meta">Organize receitas e despesas.</div>
+        </a>
+
+        <a class="item item-categoria" href="{{ url_for('listar_metas') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">flag</span>
+                <strong>Metas</strong>
+            </div>
+
+            <div class="meta">Acompanhe seus objetivos financeiros.</div>
+        </a>
+
+        <a class="item item-categoria" href="{{ url_for('comparativo_mensal') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">query_stats</span>
+                <strong>Comparativo entre meses</strong>
+            </div>
+
+            <div class="meta">Analise sua evolução financeira.</div>
+        </a>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 style="text-align:center">Relatórios</h2>
+
+    <hr class="section-divider">
+
+    <div class="list">
+
+        <a class="item item-categoria" href="{{ url_for('gerar_relatorio') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">description</span>
+                <strong>Exportar relatório</strong>
+            </div>
+
+            <div class="meta">Gere um relatório financeiro em PDF.</div>
+        </a>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 style="text-align:center">Sistema</h2>
+
+    <hr class="section-divider">
+
+    <div class="list">
+
+        <a class="item item-categoria" href="{{ url_for('sobre') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">info</span>
+                <strong>Sobre o FINE</strong>
+            </div>
+
+            <div class="meta">Informações sobre o projeto e a equipe.</div>
+        </a>
+
+        <a class="item item-categoria" href="{{ url_for('logout') }}">
+            <div class="item-categoria-header">
+                <span class="material-symbols-outlined">logout</span>
+                <strong>Sair da conta</strong>
+            </div>
+
+            <div class="meta">Encerrar a sessão do usuário.</div>
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block navigation %}
+
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        {% include "partials/navigation-left.html" %}
+
+        <div class="menu-add-wrapper">
+
+            <div class="menu-add-options" id="menu-add-options">
+
+                <a class="menu-add-option receita" href="{{ url_for('criar_receita') }}">
+                    <span class="material-symbols-outlined">arrow_circle_up</span>
+                    <span>Receita</span>
+                </a>
+
+                <a class="menu-add-option despesa" href="{{ url_for('criar_despesa') }}">
+                    <span class="material-symbols-outlined">arrow_circle_down</span>
+                    <span>Despesa</span>
+                </a>
+
+            </div>
+
+            <button type="button" class="menu-add active-transacao" id="menu-add-button">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+
+        </div>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

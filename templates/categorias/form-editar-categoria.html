@@ -1,0 +1,210 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Editar categoria
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Editar categoria</h1>
+            <p class="lead">Altere os dados da categoria</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<section class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Editar categoria</h2>
+        </div>
+
+        {% if context and context.categoria and not context.categoria.padrao %}
+            <form action="{{ url_for('confirmar_exclusao_categoria', id=context.categoria.id) }}" method="POST" style="margin:0">
+                <button type="submit" id="btn-excluir" class="expense-delete-btn" title="Excluir categoria" style="color: red; text-decoration: none;">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+            </form>
+        {% endif %}
+    </div>
+
+    {% if context and context.categoria and context.categoria.padrao %}
+        <div class="notice warning">
+            <strong>Categoria padrão do sistema</strong>
+            <div class="meta">
+                Esta categoria faz parte das opções padrão do FINE. Você pode alterar apenas a cor.
+            </div>
+        </div>
+    {% endif %}
+
+    <form id="form-categoria" action="{{ url_for('editar_categoria', id=context.categoria.id) }}" method="POST">
+
+        <div class="form-row" style="align-items:flex-start">
+            <label for="nome">Nome</label>
+
+            <input
+                id="nome"
+                name="nome"
+                type="text"
+                value="{{ context.categoria.nome if context and context.categoria else '' }}"
+                placeholder="Ex: Transporte Público"
+                {% if context and context.categoria and context.categoria.padrao %}disabled{% endif %}
+            >
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="form-row" style="align-items:flex-start">
+            <label for="descricao">Descrição</label>
+
+            <input
+                id="descricao"
+                name="descricao"
+                type="text"
+                value="{{ context.categoria.descricao if context and context.categoria else '' }}"
+                placeholder="Opcional. Ex: Ônibus, metrô e aplicativos"
+                {% if context and context.categoria and context.categoria.padrao %}disabled{% endif %}
+            >
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="form-row" style="align-items:flex-start">
+            <label for="cor">Cor</label>
+
+            <input
+                type="color"
+                id="cor"
+                name="cor"
+                value="{{ context.categoria.cor if context and context.categoria else '#585858' }}"
+            >
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="form-row">
+            <label>Tipo</label>
+
+            <div class="radio-group">
+                <label style="font-size:14px">
+                    <input
+                        type="radio"
+                        name="tipo"
+                        value="despesa"
+                        {% if context and context.categoria and context.categoria.tipo == "despesa" %}checked{% endif %}
+                        {% if context and context.categoria and context.categoria.padrao %}disabled{% endif %}
+                    >
+                    <span style="margin-left:6px">Despesa</span>
+                </label>
+
+                <label style="font-size:14px">
+                    <input
+                        type="radio"
+                        name="tipo"
+                        value="receita"
+                        {% if context and context.categoria and context.categoria.tipo == "receita" %}checked{% endif %}
+                        {% if context and context.categoria and context.categoria.padrao %}disabled{% endif %}
+                    >
+                    <span style="margin-left:6px">Receita</span>
+                </label>
+            </div>
+        </div>
+    </form>
+
+    {% if context and context.erros %}
+        <div class="status error" role="status">
+            <div class="dot"></div>
+            <div>
+                <strong>Erro ao editar categoria</strong>
+
+                {% for erro in context.erros %}
+                    <div class="meta">{{ erro }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+<section class="card">
+    <h2>Categoria selecionada</h2>
+
+    <div class="item highlight" style="border-left: none;">
+        <div class="categoria-header">
+            <div class="categoria-color" style="background-color: {{ context.categoria.cor }}"></div>
+            <strong>{{ context.categoria.nome }}</strong>
+        </div>
+
+        {% if context.categoria.descricao %}
+            <div class="meta">"{{ context.categoria.descricao }}"</div>
+        {% else %}
+            <div class="meta">Sem descrição adicionada.</div>
+        {% endif %}
+
+        {% if context.categoria.padrao %}
+            <div class="meta">Categoria <em>padrão</em>.</div>
+        {% else %}
+            <div class="meta">Categoria <em>personalizada</em>.</div>
+        {% endif %}
+        <div class="meta"> <strong style="color: grey; margin-left: 3px">({{ context.categoria.tipo }}) </strong></div>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        <a class="menu-item" href="{{ url_for('home') }}">
+            <span class="material-symbols-outlined">home</span>
+            <strong>Principal</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('listar_categorias') }}">
+            <span class="material-symbols-outlined">list_alt</span>
+            <strong>Categorias</strong>
+        </a>
+
+        <button class="menu-add menu-add-categoria" form="form-categoria" type="submit">
+            <span class="material-symbols-outlined">check</span>
+        </button>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+    </div>
+</section>
+
+<div id="overlay-excluir" class="overlay">
+    <div class="modal-card">
+        <h3>Excluir categoria</h3>
+
+        <p>
+            Você deseja realmente excluir esta categoria?
+        </p>
+
+        <div class="modal-actions">
+            <button id="btn-cancelar" class="btn ghost" type="button">
+                Não
+            </button>
+
+            <form action="{{ url_for('confirmar_exclusao_categoria', id=context.categoria.id) }}" method="POST">
+                <input type="hidden" name="confirmar-exclusao" value="Sim">
+
+                <button class="btn danger" type="submit">
+                    Sim
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,200 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Categorias
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Categorias</h1>
+            <p class="lead">Visualize e gerencie suas categorias cadastradas</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+<div class="card summary-card summary summary-card-top">
+    <h2 class="card-subtitle">Categorias</h2>
+</div>
+
+<section class="card summary-card-bottom">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Bem-vindo as categorias</h2>
+            <div class="meta">
+                Pesquise por nome, descrição ou filtre por tipo.
+            </div>
+        </div>
+    </div>
+
+    <form action="{{ url_for('listar_categorias') }}" method="GET">
+
+        <div class="form-row">
+
+            <input type="text" id="busca" name="busca" placeholder="Busque por uma palavra..." value="{{ context.busca if context and context.busca else '' }}">
+
+            <button class="btn" type="submit">Buscar</button>
+
+        </div>
+
+        <div style="height:12px"></div>
+
+        <details class="filter-details">
+
+            <summary>Filtros</summary>
+
+            <div class="form-row tipo filter-group">
+
+                <label for="tipo">Tipo</label>
+
+                <select id="tipo" name="tipo">
+
+                    <option value="">Todas</option>
+
+                    <option value="receita" {% if context and context.tipo == "receita" %}selected{% endif %}>
+                        Receitas
+                    </option>
+
+                    <option value="despesa" {% if context and context.tipo == "despesa" %}selected{% endif %}>
+                        Despesas
+                    </option>
+
+                </select>
+
+            </div>
+            <div class="form-row filter-actions">
+
+                <button class="btn-filter btn-apply" type="submit">
+                    Aplicar
+                </button>
+
+                <a class="btn-filter btn-clear" href="{{ url_for('listar_categorias') }}">
+                    Limpar
+                </a>
+
+            </div>
+
+        </details>
+
+    </form>
+
+</section>
+
+{% if context.receitas %}
+    <section class="card">
+        <h2 style="text-align:center">Receitas</h2>
+        <hr class="section-divider">
+
+        <div class="list">
+
+            {% for categoria in context.receitas %}
+
+                <a class="item item-categoria" href="{{ url_for('editar_categoria', id=categoria.id) }}" style="text-decoration:none;color:inherit">
+
+                    <div class="categoria-header">
+                        <div class="categoria-color" style="background-color: {{ categoria.cor }}"></div>
+                        <strong>{{ categoria.nome }}</strong>
+                    </div>
+
+                    <div class="meta">
+                        {% if categoria.descricao %}
+                            {{ categoria.descricao }}
+                        {% else %}
+                            Sem descrição
+                        {% endif %}
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+{% endif %}
+
+{% if context.despesas %}
+
+    <section class="card">
+
+        <h2 style="text-align:center">Despesas</h2>
+        <hr class="section-divider">
+
+        <div class="list">
+
+            {% for categoria in context.despesas %}
+
+                <a class="item item-categoria" href="{{ url_for('editar_categoria', id=categoria.id) }}" style="text-decoration:none;color:inherit">
+                    <div class="categoria-header">
+                        <div class="categoria-color"
+                            style="background-color: {{ categoria.cor }}">
+                        </div>
+                        <strong>{{ categoria.nome }}</strong>
+                    </div>
+
+                    <div class="meta">
+                        {% if categoria.descricao %}
+                            {{ categoria.descricao }}
+                        {% else %}
+                            Sem descrição
+                        {% endif %}
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endif %}
+
+{% if context and context.busca and not context.receitas and not context.despesas %}
+    <section class="card">
+
+        <div class="empty-state">
+            <span class="material-symbols-outlined">find_in_page</span>
+
+            <strong>Nenhuma categoria encontrada.</strong>
+
+            <div class="meta">
+                Não encontramos resultados para
+                "<span class="pesquisa-termo">{{ context.busca }}</span>".
+            </div>
+        </div>
+
+    </section>
+
+{% endif %}
+
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu">
+
+        {% include 'partials/navigation-left.html' %}
+
+        <a class="menu-add menu-add-categoria" href="{{ url_for('criar_categoria') }}">
+            <span class="material-symbols-outlined">add</span>
+        </a>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+    </div>
+    
+</section>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}
+    Editar meta
+{% endblock %}
+
+{% block page_header %}
+    <header>
+        {% include 'partials/logo.html' %}
+        <div>
+            <h1>Editar meta</h1>
+            <p class="lead">Altere os dados da meta</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+<section class="card">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+            <h2>Atualizar meta</h2>
+        </div>
+
+        <button id="btn-excluir" class="expense-delete-btn" type="button" form="form-metas" title="Excluir meta" style="color: red; text-decoration: none;">
+            <span class="material-symbols-outlined">delete</span>
+        </button>
+    </div>
+
+    <div class="notice warning">
+        <strong>Atenção</strong>
+        <div class="meta">
+            Você está editando uma meta existente. Salve apenas quando tiver certeza da alteração.
+        </div>
+    </div>
+
+    <form id="form-metas" action="/fine/metas/editar/{{ context.meta.id }}" method="POST">
+        <div class="form-row">
+            <label for="conteudo">Edite a meta</label>
+
+            <input
+                type="text"
+                id="conteudo"
+                name="conteudo"
+                value="{{ context.meta.conteudo }}"
+            >
+
+            <button class="btn" type="submit">Salvar</button>
+        </div>
+    </form>
+
+    {% if context and context.erros %}
+        {% for erro in context.erros %}
+            <div class="status error">
+                <div class="dot"></div>
+                <div>
+                    <strong>Erro ao atualizar meta</strong>
+                    <div class="meta">{{ erro }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</section>
+
+<section class="card">
+
+    <h2>Meta selecionada</h2>
+
+    <div class="meta" style="margin-bottom:12px">
+        Esta é a meta que está sendo editada.
+    </div>
+
+    <div class="meta-item">
+        <div class="meta-texto"> 
+            <strong>Meta atual</strong>
+            <span>{{ context.meta.conteudo }}</span>
+        </div>
+    </div>
+
+</section>
+
+<section class="card">
+
+    <h2>Navegação</h2>
+
+    <div class="bottom-menu meta-menu">
+
+        {% include 'partials/navigation-left.html' %}
+
+        <button class="menu-add menu-add-meta" form="form-metas" type="submit"> 
+            <span class="material-symbols-outlined">check</span>
+        </button>
+
+        <a class="menu-item active" href="{{ url_for('mais') }}">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <strong>Mais</strong>
+        </a>
+
+        <a class="menu-item" href="{{ url_for('sobre') }}">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Sobre</strong>
+        </a>
+
+    </div>
+
+</section>
+
+<div id="overlay-excluir" class="overlay">
+    <div class="modal-card">
+        <h3>Excluir meta</h3>
+
+        <p>
+            Você deseja realmente excluir esta meta?
+        </p>
+
+        <div class="modal-actions">
+            <button id="btn-cancelar" class="btn ghost" type="button">
+                Não
+            </button>
+
+            <form
+                action="/fine/metas/excluir/confirmar/{{ context.meta.id }}"
+                method="POST"
+            >
+                <input
+                    type="hidden"
+                    name="confirmar-exclusao"
+                    value="Sim"
+                >
+
+                <button class="btn danger" type="submit">
+                    Sim
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
