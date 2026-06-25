@@ -203,7 +203,7 @@ O Diagrama de Classes está disponível em:
 
 ## Tela de Login
 
-![Tela de Login](docs/prototipos/login.png)
+![Tela de Login](docs/apresentacao/telas/login/login.png)
 
 ---
 
