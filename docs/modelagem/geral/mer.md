@@ -1,55 +1,74 @@
-erDiagram
-    USUARIO ||--o{ RECEITA : possui
-    USUARIO ||--o{ DESPESA : possui
-    USUARIO ||--o{ CATEGORIA : possui
-    USUARIO ||--o{ META : possui
+# Modelo Entidade-Relacionamento
 
-    CATEGORIA ||--o{ RECEITA : classifica
-    CATEGORIA ||--o{ DESPESA : classifica
+## Descrição
 
-    USUARIO {
-        int id PK
-        string nome
-        string email UK
-        string senha
-        date data_nascimento
-        string pergunta_secreta
-        string resposta_secreta
-    }
+Este documento apresenta o Modelo Entidade-Relacionamento (MER) do FINE, representando as principais entidades do sistema e seus relacionamentos.
 
-    CATEGORIA {
-        int id PK
-        string nome
-        string descricao
-        string tipo
-        string cor
-        boolean padrao
-        int usuario_id FK
-    }
+---
 
-    RECEITA {
-        int id PK
-        decimal valor
-        date data
-        string descricao
-        boolean recebido
-        int usuario_id FK
-        int categoria_id FK
-    }
+## Diagrama (Mermaid)
 
-    DESPESA {
-        int id PK
-        decimal valor
-        date data
-        string descricao
-        boolean pago
-        int usuario_id FK
-        int categoria_id FK
-    }
+```mermaid
+flowchart LR
 
-    META {
-        int id PK
-        string conteudo
-        boolean fixada
-        int usuario_id FK
-    }
+    Usuario["Usuário"]
+
+    Receita["Receita"]
+    Despesa["Despesa"]
+    Categoria["Categoria"]
+    Meta["Meta"]
+
+    Usuario -- "1:N" --> Receita
+    Usuario -- "1:N" --> Despesa
+    Usuario -- "1:N" --> Categoria
+    Usuario -- "1:N" --> Meta
+
+    Categoria -- "1:N" --> Receita
+    Categoria -- "1:N" --> Despesa
+```
+
+---
+
+## Entidades
+
+### Usuário
+- id (PK)
+- nome
+- email
+- senha
+- data_nascimento
+- pergunta_secreta
+- resposta_secreta
+
+### Categoria
+- id (PK)
+- nome
+- descricao
+- tipo
+- cor
+- padrao
+- usuario_id (FK)
+
+### Receita
+- id (PK)
+- valor
+- data
+- descricao
+- recebido
+- usuario_id (FK)
+- categoria_id (FK)
+
+### Despesa
+- id (PK)
+- valor
+- data
+- descricao
+- pago
+- usuario_id (FK)
+- categoria_id (FK)
+
+### Meta
+- id (PK)
+- conteudo
+- fixada
+- usuario_id (FK)
