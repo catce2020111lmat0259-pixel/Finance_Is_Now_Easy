@@ -25,5 +25,4 @@ flowchart LR
     Usuario --> Orcamento["Controle de orçamento"]
     Usuario --> Dashboard["Visualizar dashboard"]
     Usuario --> Filtros["Filtrar transações"]
-    Usuario --> Personalizacao["Personalizar interface"]
     Usuario --> Dados["Persistência de dados"]
