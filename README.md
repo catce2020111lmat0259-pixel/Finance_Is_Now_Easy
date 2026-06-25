@@ -454,6 +454,14 @@ Entre as evidências disponíveis estão:
 - Sistema em funcionamento
 - Registro das funcionalidades implementadas
 
+## Demonstração
+
+Vídeo direto ou o link da demonstração  do sistema disponível em:
+
+`docs/apresentacao/demo.mp4`
+
+link: https://youtu.be/6_J1eaIEG1w
+
 Essas evidências documentam a evolução do projeto desde o levantamento de requisitos até a implementação da versão final do sistema.
 
 ---
