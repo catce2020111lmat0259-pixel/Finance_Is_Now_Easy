@@ -328,7 +328,7 @@ Status: Concluída
 
 ## Gestão das Tarefas (atual)
 
-![Jira](docs/planejamento/Jira(2).png)
+![Jira](docs/planejamento/Jira(1).png)
 
 ---
 
@@ -459,6 +459,21 @@ Essas evidências documentam a evolução do projeto desde o levantamento de req
 ---
 
 # 13. Como Executar o Projeto
+
+## Estrutura do Projeto
+
+O projeto foi desenvolvido utilizando a arquitetura MVC (Model-View-Controller), organizada da seguinte forma:
+
+- `controllers/` — lógica de negócio e processamento das requisições.
+- `models/` — entidades e persistência dos dados.
+- `routes/` — definição das rotas da aplicação.
+- `templates/` — páginas HTML renderizadas pelo Flask.
+- `static/` — arquivos estáticos (CSS, JavaScript e imagens).
+- `database/` — scripts e documentação do banco de dados.
+- `docs/` — documentação técnica do projeto.
+- `assets/` — imagens utilizadas no README e na documentação.
+- `main.py` — ponto de entrada da aplicação.
+
 
 ```bash
 git clone https://github.com/catce2020111lmat0259-pixel/Finance_Is_Now_Easy
