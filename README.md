@@ -456,11 +456,11 @@ Entre as evidências disponíveis estão:
 
 ## Demonstração
 
-Vídeo direto ou o link da demonstração  do sistema disponível em:
-
-`docs/apresentacao/demo.mp4`
+Vídeo via link da demonstração  do sistema disponível em:
 
 link: https://youtu.be/6_J1eaIEG1w
+
+link do site (teste): https://finance-is-now-easy.onrender.com
 
 Essas evidências documentam a evolução do projeto desde o levantamento de requisitos até a implementação da versão final do sistema.
 
