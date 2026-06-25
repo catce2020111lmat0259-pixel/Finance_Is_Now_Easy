@@ -67,17 +67,12 @@
 - O sistema deve permitir filtro por período.
 - O sistema deve informar quando não houver resultados.
 
-## HU14 - Personalização
-- O sistema deve permitir alterar cores da interface.
-- O sistema deve exibir prévia das alterações.
-- O sistema deve permitir restaurar o padrão.
-
-## HU15 - Persistência de dados
+## HU14 - Persistência de dados
 - O sistema deve salvar dados automaticamente.
 - O sistema deve recuperar dados ao reiniciar.
 - O sistema deve garantir integridade dos dados após login.
 
-## HU16 - Login e autenticação
+## HU15 - Login e autenticação
 - O sistema deve permitir autenticação de usuários.
 - O sistema deve restringir acesso a usuários autenticados.
 - O sistema deve proteger os dados do usuário.

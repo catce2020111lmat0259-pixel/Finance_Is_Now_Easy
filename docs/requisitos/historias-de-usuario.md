@@ -39,11 +39,8 @@ Como usuário, quero navegar pela aplicação em qualquer dispositivo com uma in
 ## HU13 - Filtros de pesquisa
 Como usuário financeiro, quero filtrar minhas transações por categoria ou período, para que eu possa encontrar lançamentos específicos e analisar meus gastos de forma segmentada.
 
-## HU14 - Personalização de cores
-Como usuário do app, quero personalizar as cores da interface, para que eu possa adaptar a aparência do sistema às minhas preferências visuais.
-
-## HU15 - Persistência de dados
+## HU14 - Persistência de dados
 Como usuário financeiro, quero que meus dados fiquem armazenados com segurança, para que eu não perca minhas informações ao fechar o aplicativo ou sair da sessão.
 
-## HU16 - Login e autenticação
+## HU15 - Login e autenticação
 Como usuário do sistema, quero realizar login na aplicação, para acessar minhas informações de forma segura.
